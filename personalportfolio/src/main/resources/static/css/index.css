@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+
+@font-face {
+  font-family: 'Old Standard TT';
+  src: url('/fonts/OldStandardTT-Regular.woff2') format('woff2');
+}
+
+.navbar-brand{
+	font-family: Old Standard TT;
+}
+
+.navbar-brand-title {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.navbar-brand-subtitle {
+  font-size: smaller;
+  font-style: italic;
+  color: gray;
+}
