@@ -1,5 +1,47 @@
 @charset "ISO-8859-1";
+#subtitle{
+	width: 258px;
+height: 22px;
 
+font-family: 'Old Standard TT';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+
+/* Main */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+#title{
+width: 176px;
+height: 44px;
+
+font-family: 'Old Standard TT';
+font-style: normal;
+font-weight: 400;
+font-size: 36px;
+line-height: 44px;
+
+/* Main */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: -10px 0px;
+}
 
 @font-face {
   font-family: 'Old Standard TT';
