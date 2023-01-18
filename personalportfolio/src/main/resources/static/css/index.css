@@ -1,4 +1,28 @@
 @charset "ISO-8859-1";
+
+ul {
+    display: flex;
+    align-items: center;
+}
+#background{
+	display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 50px 10px;
+gap: 15px;
+
+width: 428px;
+height: 599px;
+
+background: url(images/nasaback.png);
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}
 #subtitle{
 	width: 258px;
 height: 22px;
