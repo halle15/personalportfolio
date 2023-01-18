@@ -1,5 +1,138 @@
 @charset "ISO-8859-1";
 
+
+
+#ctatitle{
+	font-family: 'Alegreya';
+font-style: italic;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+#ctacontent{
+	font-family: 'Alegreya';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 19px;
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+#ctasquare{
+	display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 5px;
+
+
+
+background: rgba(32, 32, 32, 0.8);
+border-radius: 10px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+#ctasection{
+	display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 10px;
+gap: 10px;
+
+
+/* shadow */
+
+filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
+
+/* Inside auto layout */
+
+flex: none;
+order: 2;
+flex-grow: 0;
+}
+
+body {
+  padding-top: 60px;
+}
+
+nav
+{
+overflow: auto;
+}
+
+#bgtitle{
+
+font-family: 'Old Standard TT';
+font-style: normal;
+font-weight: 400;
+text-align: center;
+align-items: center;
+
+/* Main */
+
+color: #FFFFFF;
+
+/* shadow */
+
+text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.75);
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+}
+#bgsubtitle{
+
+font-family: 'Old Standard TT';
+font-style: normal;
+font-weight: 400;
+display: flex;
+align-items: center;
+text-align: center;
+
+/* Main */
+
+color: #FFFFFF;
+
+/* shadow */
+
+text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.75);
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+
+
 ul {
     display: flex;
     align-items: center;
@@ -7,21 +140,20 @@ ul {
 #background{
 	display: flex;
 flex-direction: column;
-justify-content: space-between;
 align-items: center;
 padding: 50px 10px;
-gap: 15px;
+gap: 25px;
 
-width: 428px;
-height: 599px;
 
-background: url(images/nasaback.png);
+background: url(images/test.jpg);
 
 /* Inside auto layout */
 
 flex: none;
 order: 1;
 flex-grow: 0;
+align-content: center;
+flex-wrap: wrap;
 }
 #subtitle{
 	width: 258px;
@@ -85,4 +217,8 @@ margin: -10px 0px;
   font-size: smaller;
   font-style: italic;
   color: gray;
+}
+
+@media (min-width: 980px) {
+
 }
