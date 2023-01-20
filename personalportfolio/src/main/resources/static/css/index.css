@@ -1,12 +1,108 @@
 @charset "ISO-8859-1";
 
 
+#whytext{
+	display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 15px 0px;
+gap: 10px;
+
+
+
+/* tiles */
+
+background: #1E1E1E;
+
+/* Inside auto layout */
+
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+}
+
+#whyevann{
+	display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 15px 0px;
+gap: 10px;
+
+
+
+/* tiles */
+
+background: #1E1E1E;
+
+/* Inside auto layout */
+
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+}
+#cta{
+	box-sizing: border-box;
+
+/* Auto layout */
+
+font-size: 1.75rem;
+font-family: "Old Standard TT";
+color: white;
+background: none;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 15px 50px;
+gap: 10px;
+
+
+
+border: 1px solid #FFFFFF;
+/* shadow */
+
+filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
+border-radius: 5px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+}
+
+#frameholder{
+	
+	
+	display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-start;
+padding: 10px 0px;
+gap: 20px;
+isolation: isolate;
+
+
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 2;
+flex-grow: 0;
+}
 
 #ctatitle{
 	font-family: 'Alegreya';
-font-style: italic;
+
+
 font-weight: 500;
-font-size: 20px;
+
 line-height: 27px;
 text-align: center;
 
@@ -23,7 +119,6 @@ flex-grow: 0;
 	font-family: 'Alegreya';
 font-style: normal;
 font-weight: 400;
-font-size: 14px;
 line-height: 19px;
 text-align: center;
 
@@ -42,7 +137,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 20px;
-gap: 5px;
+gap: 15px;
 
 
 
@@ -62,7 +157,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 0px 10px;
-gap: 10px;
+gap: 15px;
 
 
 /* shadow */
@@ -112,7 +207,7 @@ flex-grow: 0;
 #bgsubtitle{
 	
 	
-font-size: 1.75rem;
+font-size: calc((1.25rem) + 1.5vw);
 font-family: 'Old Standard TT';
 font-style: normal;
 font-weight: 400;
@@ -144,11 +239,12 @@ ul {
 	display: flex;
 flex-direction: column;
 align-items: center;
-padding: 50px 10px;
-gap: 25px;
+padding: 75px 10px;
+gap: 50px;
 
 
-background: url(images/test.jpg);
+
+background: url(images/nasaback.png);
 
 /* Inside auto layout */
 
