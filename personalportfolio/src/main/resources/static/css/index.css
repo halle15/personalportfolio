@@ -120,7 +120,7 @@
 }
 
 #chart {
-	height: 40vh;
+	height: 30vh;
 }
 
 .whysectionsubtitle {
@@ -461,7 +461,7 @@ nav {
 }
 
 #bgsubtitle {
-	font-size: calc(( 1.25rem)+ 1.25vw);
+	font-size: calc(( 1.25rem) + 1.25vw);
 	font-family: 'Old Standard TT';
 	font-style: normal;
 	font-weight: 400;
@@ -488,7 +488,7 @@ ul {
 	flex-direction: column;
 	align-items: center;
 	padding: 75px 10px;
-	gap: 25px;
+	gap: 7.5vh;
 	background: url(images/nasaback.png);
 	/* Inside auto layout */
 	flex: none;
