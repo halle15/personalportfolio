@@ -1,4 +1,7 @@
 @charset "ISO-8859-1";
+.aboutme-text{
+	font-size: calc(.75 * (1.275rem + .3vw))!important;
+}
 
 .aboutme-title{
 	font-weight: 400;
@@ -493,7 +496,9 @@ ul {
 	flex-direction: column;
 	align-items: center;
 	padding: 10vh 10vw;
-	gap: 7.5vh;
+	gap: 5vh;
+	
+	
 	background: url(images/nasaback.png);
 	/* Inside auto layout */
 	flex: none;
@@ -502,6 +507,12 @@ ul {
 	align-content: center;
 	flex-wrap: wrap;
 	background-size: cover;
+}
+
+@media ( min-width : 980px) {
+	#background{
+	gap: 7.5vh;
+	}
 }
 
 #subtitle {
