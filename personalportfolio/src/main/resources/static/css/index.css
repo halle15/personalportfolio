@@ -8,7 +8,7 @@
 }
 
 .aboutme-section{
-	font-family: 'Alegreya';
+	font-family: 'Vegur';
 }
 
 .imgframe {
@@ -133,7 +133,7 @@
 }
 
 .whysectionsubtitle {
-	font-family: 'Alegreya';
+	font-family: 'Vegur';
 	font-weight: 400;
 	text-align: center;
 	/* Main */
@@ -275,7 +275,7 @@
 
 .titletext {
 	font-size: calc(1.75 * ( 1.375rem + 1.5vw));
-	font-family: 'Alegreya';
+	font-family: 'Vegur';
 	font-style: italic;
 	font-weight: 500;
 	line-height: 44px;
@@ -290,7 +290,7 @@
 }
 
 .subtitletext {
-	font-family: 'Alegreya';
+	font-family: 'Vegur';
 	font-style: italic;
 	font-weight: 400;
 	font-size: calc(.75 * ( 1.375rem + 1.5vw));
@@ -389,7 +389,7 @@
 }
 
 #ctatitle {
-	font-family: 'Alegreya';
+	font-family: 'Vegur';
 	font-weight: 500;
 	line-height: 27px;
 	text-align: center;
@@ -401,7 +401,7 @@
 }
 
 #ctacontent {
-	font-family: 'Alegreya';
+	font-family: 'Vegur';
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
