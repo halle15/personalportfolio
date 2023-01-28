@@ -23,7 +23,7 @@
 }
 
 .contenttext {
-	font-family: 'Old Standard TT';
+	font-family: 'Vegur';
 	font-style: normal;
 	font-weight: 400;
 	color: #000000;
@@ -146,7 +146,6 @@
 }
 
 .whysectiontitle {
-	font-family: 'Old Standard TT';
 	font-style: normal;
 	font-weight: 400;
 	display: flex;
@@ -275,8 +274,7 @@
 
 .titletext {
 	font-size: calc(1.75 * ( 1.375rem + 1.5vw));
-	font-family: 'Vegur';
-	font-style: italic;
+	font-family: 'Old Standard TT';
 	font-weight: 500;
 	line-height: 44px;
 	/* identical to box height */
@@ -389,7 +387,7 @@
 }
 
 #ctatitle {
-	font-family: 'Vegur';
+	font-family: 'Old Standard TT';
 	font-weight: 500;
 	line-height: 27px;
 	text-align: center;
@@ -401,7 +399,7 @@
 }
 
 #ctacontent {
-	font-family: 'Vegur';
+	font-family: 'Old Standard TT';
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
@@ -516,7 +514,7 @@ ul {
 }
 
 #subtitle {
-	font-family: 'Old Standard TT';
+	font-family: 'Vegur';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 17px;
@@ -546,9 +544,18 @@ ul {
 	margin: -10px 0px;
 }
 
+body{
+	font-family: "Vegur";
+}
+
 @font-face {
 	font-family: 'Old Standard TT';
-	src: url('/fonts/OldStandardTT-Regular.woff2') format('woff2');
+	src: url('/font/OldStandardTT-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Vegur';
+	src: url('/font/Vegur.woff2') format('woff2');
 }
 
 .navbar-brand {
