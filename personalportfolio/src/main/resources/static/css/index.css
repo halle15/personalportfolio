@@ -1,27 +1,68 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
+.final-cta{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-.testimonials-card{
-	max-width: 65vw;
+.final-cta-button-text{
+	box-sizing: border-box;
+	/* Auto layout */
+	font-size: 1.75rem;
+	font-family: "Old Standard TT";
+	color: white;
+	background: none;
+	padding: 15px 50px;
+	gap: 10px;
+	/* shadow */
+	filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
+	border-radius: 5px;
+}
+.final-cta-button {
+	display: flex;
+	padding: 5px 10px;
+	gap: 10px;
+
+	/* Alt */
+	background: #1E1E1E;
+	/* shadow */
+	box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.75);
+	border-radius: 5px;
+	/* Inside auto layout */
+}
+
+.final-cta-line {
+	/* Inside auto layout */
+	border-color: black;
+	width: 75vw;
+	flex: none;
+}
+
+.final-cta-text {
+	font-family: "Vegur";
+	text-align: center;
+}
+
+.testimonials-card {
+	max-width: 75vw;
 }
 
 @media ( min-width : 980px) {
-	.testimonials-card{
-	max-width: 40vw;
-}
-	
-}
-
-
-
-.aboutme-text{
-	font-size: calc(.75 * (1.275rem + .3vw))!important;
+	.testimonials-card {
+		max-width: 40vw;
+	}
 }
 
-.aboutme-title{
+.aboutme-text {
+	font-size: calc(.75 * ( 1.275rem + .3vw)) !important;
+}
+
+.aboutme-title {
 	font-weight: 400;
 }
 
-.aboutme-section{
+.aboutme-section {
 	font-family: 'Vegur';
 }
 
@@ -77,7 +118,6 @@
 	padding: 0px;
 	/* Inside auto layout */
 	flex: none;
-
 }
 
 .textframe {
@@ -258,7 +298,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: calc(((2rem) + 1.5vw));
+	gap: calc((( 2rem) + 1.5vw));
 	/* Inside auto layout */
 	flex: none;
 	order: 1;
@@ -509,8 +549,6 @@ ul {
 	align-items: center;
 	padding: 10vh 10vw;
 	gap: 5vh;
-	
-	
 	background: url(images/nasaback.png);
 	/* Inside auto layout */
 	flex: none;
@@ -522,8 +560,8 @@ ul {
 }
 
 @media ( min-width : 980px) {
-	#background{
-	gap: 7.5vh;
+	#background {
+		gap: 7.5vh;
 	}
 }
 
@@ -558,13 +596,8 @@ ul {
 	margin: -10px 0px;
 }
 
-body{
+body {
 	font-family: "Vegur";
-}
-
-@font-face {
-	font-family: 'Old Standard TT';
-	src: url('/font/OldStandardTT-Regular.woff2') format('woff2');
 }
 
 @font-face {
