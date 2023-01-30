@@ -1,4 +1,18 @@
 @charset "ISO-8859-1";
+
+.testimonials-card{
+	max-width: 65vw;
+}
+
+@media ( min-width : 980px) {
+	.testimonials-card{
+	max-width: 40vw;
+}
+	
+}
+
+
+
 .aboutme-text{
 	font-size: calc(.75 * (1.275rem + .3vw))!important;
 }
