@@ -36,7 +36,12 @@ public class PersonalPortfolioController {
 		}
 	  
 	  @GetMapping(value = "/home")
-		public String index1() {
+		public String home() {
 			return "index";
 		}
+	  @GetMapping(value = "/contact")
+		public String contact() {
+			return "contact";
+		}
+	  
 }

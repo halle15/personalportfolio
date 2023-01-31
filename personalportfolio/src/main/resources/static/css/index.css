@@ -1,9 +1,57 @@
 @charset "UTF-8";
+
+.footer{
+	border: 0px;
+	border-color: transparent;
+	flex-shrink: 0;
+	overflow:hidden;
+}
+
+@media ( max-width : 980px) {
+	.footer{
+		gap: 1vh;
+	}
+
+}
+.footer-holder{
+		display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 1;
+}
+.footer-section-link{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.footer-section-title{
+	
+	font-style: normal;
+	color: #FFFFFF;
+}
+.footer-section{
+	font-family: 'Old Standard TT';
+	color: #FFFFFF;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 1;
+}
 .final-cta{
 	display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2vh
 }
 
 .final-cta-button-text{
@@ -17,18 +65,17 @@
 	gap: 10px;
 	/* shadow */
 	filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
-	border-radius: 5px;
 }
 .final-cta-button {
 	display: flex;
 	padding: 5px 10px;
 	gap: 10px;
-
+	border: 0px;
+	border-radius: 5px;
 	/* Alt */
 	background: #1E1E1E;
 	/* shadow */
-	box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.75);
-	border-radius: 5px;
+	box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);
 	/* Inside auto layout */
 }
 
@@ -48,6 +95,9 @@
 	max-width: 75vw;
 }
 
+.testimonials-section {
+	
+}
 @media ( min-width : 980px) {
 	.testimonials-card {
 		max-width: 40vw;
@@ -563,8 +613,11 @@ ul {
 	#background {
 		gap: 7.5vh;
 	}
+	
 }
-
+.nav-link{
+	font-size: calc(.50 * (1.25rem) + .75vw);;
+}
 #subtitle {
 	font-family: 'Vegur';
 	font-style: normal;
@@ -605,6 +658,11 @@ body {
 	src: url('/font/Vegur.woff2') format('woff2');
 }
 
+.navbar-nav{
+	font-family: Old Standard TT;
+	align-items: flex-start;
+}
+
 .navbar-brand {
 	font-family: Old Standard TT;
 }
@@ -619,5 +677,15 @@ body {
 	color: gray;
 }
 
-@media ( min-width : 980px) {
+.totalback{
+	
+	background-color: white;
+}
+html{
+	background-color: rgb(32, 32,32);
+}
+@media ( max-width : 980px) {
+		.nav-link{
+	font-size: calc(( 1.25rem) + 1.25vw);;
+}
 }
