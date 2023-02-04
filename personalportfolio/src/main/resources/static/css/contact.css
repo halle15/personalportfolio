@@ -6,7 +6,7 @@
 	font-family: "Old Standard TT";
 }
 .contact-page-container{
-	margin-inline: 6rem;
+	margin-inline: 3rem;
 	margin-top: -30px;
 }
 
@@ -24,7 +24,7 @@
 	}
 	
 	.contact-section{
-		width: 33%;
+		width: 45%;
 	}
 	
 }
