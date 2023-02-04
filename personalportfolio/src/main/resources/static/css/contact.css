@@ -1,20 +1,12 @@
 @charset "UTF-8";
 
-@media ( min-width: 980px){
-#inputText{
-	width: 66%;
-}
-#inputName{
-	width: 33%;
-}
-#inputEmail{
-	width: 33%;
-}
-}
+
+
 .contact-form-label{
 	font-family: "Old Standard TT";
 }
 .contact-page-container{
+	margin-inline: 6rem;
 	margin-top: -30px;
 }
 
@@ -25,12 +17,26 @@
 	overflow:hidden;
 }
 
+@media ( min-width : 980px) {
+	.contact-form-top{
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.contact-section{
+		width: 33%;
+	}
+	
+}
+
 @media ( max-width : 980px) {
 	.footer{
 		gap: 1vh;
 	}
-
+	
 }
+
+
 .footer-holder{
 		display: flex;
 	flex-direction: column;
