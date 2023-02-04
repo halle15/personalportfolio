@@ -1,5 +1,23 @@
 @charset "UTF-8";
 
+@media ( min-width: 980px){
+#inputText{
+	width: 66%;
+}
+#inputName{
+	width: 33%;
+}
+#inputEmail{
+	width: 33%;
+}
+}
+.contact-form-label{
+	font-family: "Old Standard TT";
+}
+.contact-page-container{
+	margin-top: -30px;
+}
+
 .footer{
 	border: 0px;
 	border-color: transparent;
@@ -348,11 +366,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: calc((( 2rem) + 1.5vw));
+	gap: calc(( .25 * ( 2rem) + 1.5vw));
 	/* Inside auto layout */
 	flex: none;
 	order: 1;
 	flex-grow: 0;
+	
 }
 
 .line {
@@ -393,10 +412,6 @@
 
 .subtitletext {
 	font-family: 'Vegur';
-	font-style: italic;
-	font-weight: 400;
-	font-size: calc(.75 * ( 1.375rem + 1.5vw));
-	line-height: 16px;
 	display: flex;
 	align-items: center;
 	text-align: center;

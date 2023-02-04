@@ -33,46 +33,112 @@
 <title>Evann Hall - Full Stack Developer and Designer - Contact</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="#"> <span
-			class="navbar-brand-title h2" id="title">Evann Hall</span> <br>
-			<span class="navbar-brand-subtitle h3" id="subtitle">Full
-				Stack Developer and Designer</span>
-		</a>
-		<button class="navbar-toggler" type="button"
-			data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
-			aria-controls="offcanvasDarkNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1"
-			id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-			<div class="offcanvas-header">
-				<h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Evann
-					Hall - Full Stack Development/Design</h5>
-				<button type="button" class="btn-close btn-close-white"
-					data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			</div>
-			<div class="offcanvas-body">
-				<ul class="navbar-nav justify-content-end flex-grow-1 me-3 pe-3 gap-2">
-					<li class="nav-item"><a class="nav-link"
-						aria-current="page" href="home">Home</a></li>
-					<li class="nav-item"><a class="nav-link active" href="contact">Contact</a></li>
-					</form>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"> <span
+				class="navbar-brand-title h2" id="title">Evann Hall</span> <br>
+				<span class="navbar-brand-subtitle h3" id="subtitle">Full
+					Stack Developer and Designer</span>
+			</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+				aria-controls="offcanvasDarkNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1"
+				id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+				<div class="offcanvas-header">
+					<h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Evann
+						Hall - Full Stack Development/Design</h5>
+					<button type="button" class="btn-close btn-close-white"
+						data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+					<ul
+						class="navbar-nav justify-content-end flex-grow-1 me-3 pe-3 gap-2">
+						<li class="nav-item"><a class="nav-link" aria-current="page"
+							href="home">Home</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="contact">Contact</a></li>
+						</form>
+				</div>
 			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
 
 	<div class="btxt">
 		<div class="wbg title">
 			<div class="sectionsubtitle">
 				<div class="sectionsection">
 					<div class="titletext">Contact</div>
-				<hr class="line">
+					<div class="subtitletext h5 mx-3">Have any questions? Fill
+						out the form below and I'll be sure to get back to you as soon as
+						possible!</div>
+					<hr class="line">
+				</div>
 			</div>
 		</div>
+
+		<div class="contact-page-container">
+
+			<div class="contact-form-container m-5">
+				<form>
+					<div class="mb-3">
+						<label for="inputName" class="form-label contact-form-label fs-4">Name</label>
+						<input type="text" class="form-control" id="inputName">
+					</div>
+					<div class="mb-3">
+						<label for="inputEmail" class="form-label contact-form-label fs-4">Email
+							address</label> <input type="email" class="form-control" id="inputEmail"
+							aria-describedby="emailHelp">
+						<div id="emailHelp" class="form-text">We'll never share your
+							information with anyone else.</div>
+					</div>
+					<div class="mb-3">
+						<label for="inputText" class="form-label contact-form-label fs-4">Your Message</label>
+						<textarea class="form-control" id="inputText"
+							rows="3"></textarea>
+					</div>
+
+					<div class="my-3"></div>
+					<button type="submit" class="btn btn-primary fs-4 mt-3">Submit</button>
+				</form>
+
+
+			</div>
+			<div class="contact-aboutme-container"></div>
+		</div>
+
+
 	</div>
-yo
+	<footer class="footer bg-dark p-3">
+
+		<div
+			class="footer-holder flex-md-row mt-lg-3 mt-lg-4 mt-1 gap-4 gap-lg-1">
+			<div class="footer-section flex-fill">
+				<a class="navbar-brand" href="/"> <span
+					class="navbar-brand-title h2" id="title">Evann Hall</span> <br>
+					<span class="navbar-brand-subtitle h3" id="subtitle">Full
+						Stack Developer and Designer</span>
+				</a>
+			</div>
+			<div class="footer-section flex-fill">
+				<div class="footer-section-title h2">Social</div>
+				<div class="footer-section-content d-flex flex-column">
+					<a class="footer-section-link">GitHub</a> <a
+						class="footer-section-link">LinkedIn</a>
+				</div>
+			</div>
+			<div class="footer-section flex-fill">
+				<div class="footer-section-title h2">General</div>
+				<div class="footer-section-content d-flex flex-column">
+					<a class="footer-section-link">Home</a> <a
+						class="footer-section-link">Contact</a> <a
+						class="footer-section-link">Terms of Service</a> <a
+						class="footer-section-link">Privacy Policy</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
