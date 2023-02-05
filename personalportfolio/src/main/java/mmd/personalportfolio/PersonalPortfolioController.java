@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PersonalPortfolioController {
+	
+	MessageRepository repo;
+	
+	PersonalPortfolioController(MessageRepository repo){
+		this.repo = repo;
+	}
 	/*
 		@RequestMapping(value = "/css/{name}")
 		public String getCSS(@PathVariable String name) {
