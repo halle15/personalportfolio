@@ -52,15 +52,13 @@ public class PersonalPortfolioController {
 		}
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-		public Message putMessage(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
+		public String putMessage(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
 		  	Message inMsg = new Message(name, email, message);
 		
 			repo.save(inMsg);
 		    
-			return inMsg;
+			return "contact";
 		}
-	  
 }
 
 

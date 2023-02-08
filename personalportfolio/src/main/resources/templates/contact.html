@@ -81,17 +81,18 @@
 		<div class="contact-page-container">
 
 			<div class="contact-form-container m-5">
-				<form>
+				<form method="post" action="/message">
 					<div class="contact-form-top">
 						<div class="mb-3 contact-section">
 							<label for="inputName" class="form-label contact-form-label fs-4">Name</label>
-							<input type="text" class="form-control" id="inputName">
+							<input type="text" name="name" class="form-control"
+								id="inputName">
 						</div>
 						<div class="mb-3 contact-section">
 							<label for="inputEmail"
 								class="form-label contact-form-label fs-4">Email address</label>
-							<input type="email" class="form-control" id="inputEmail"
-								aria-describedby="emailHelp">
+							<input type="email" name="email" class="form-control"
+								id="inputEmail" aria-describedby="emailHelp">
 							<div id="emailHelp" class="form-text">We'll never share
 								your information with anyone else.</div>
 						</div>
@@ -99,7 +100,8 @@
 					<div class="mb-3">
 						<label for="inputText" class="form-label contact-form-label fs-4">Your
 							Message</label>
-						<textarea class="form-control" id="inputText" rows="3"></textarea>
+						<textarea class="form-control" name="message" id="inputText"
+							rows="3"></textarea>
 					</div>
 
 					<div class="my-3"></div>

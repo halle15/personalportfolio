@@ -17,14 +17,17 @@ public class MessageFilter implements Filter {
 		String endpoint = httpRequest.getRequestURI();
 
 		String inboundIP = request.getRemoteAddr();
+		
+		System.out.println(inboundIP);
 
-		if (!inboundIP.equals("192.168.1.1")) {
-			throw new ServletException("Access to this endpoint is restricted");
-		} 
-		else {
+		//if (inboundIP.equals("192.168.1.1") || inboundIP.equals("0:0:0:0:0:0:0:1")) {
+
 			// allow access to all other endpoints
 			System.out.println("passed");
 			chain.doFilter(request, response);
-		}
+		//} 
+		/*else {
+			throw new ServletException("Access to this endpoint is restricted");
+		}*/
 	}
 }

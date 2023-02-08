@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+// sample post request curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john.doe@example.com\",\"message\":\"This is a sample message.\"}" http://localhost:8080/messages
+
+
 @Entity
 public class Message {
 	
