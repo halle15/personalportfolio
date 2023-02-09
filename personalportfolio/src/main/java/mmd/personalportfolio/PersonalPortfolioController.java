@@ -50,6 +50,11 @@ public class PersonalPortfolioController {
 		public String contact() {
 			return "contact";
 		}
+	
+	@GetMapping(value = "/error")
+	public String error() {
+		return "error";
+	}
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 		public String putMessage(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
