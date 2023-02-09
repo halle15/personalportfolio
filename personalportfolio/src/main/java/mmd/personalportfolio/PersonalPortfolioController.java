@@ -15,13 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class PersonalPortfolioController {
 
 	MessageRepository repo;
+	IPRateLimiter limiter;
 
-	PersonalPortfolioController(MessageRepository repo) {
+	PersonalPortfolioController(MessageRepository repo, IPRateLimiter limiter) {
 		this.repo = repo;
+		this.limiter = limiter;
 	}
 	/*
 	 * @RequestMapping(value = "/css/{name}") public String getCSS(@PathVariable
@@ -47,24 +54,34 @@ public class PersonalPortfolioController {
 	}
 
 	@GetMapping(value = "/contact")
-		public String contact() {
-			return "contact";
-		}
-	
+	public String contact() {
+		return "contact";
+	}
+
 	@GetMapping(value = "/error")
 	public String error() {
 		return "error";
 	}
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
-		public String putMessage(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
-		  	Message inMsg = new Message(name, email, message);
+	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
+			@RequestParam String email, @RequestParam String message) {
+		Message inMsg = new Message(name, email, message);
 		
-			repo.save(inMsg);
-		    
-			return "contact";
+		if(!limiter.tryAcquire(request.getRemoteAddr())) {
+			try {
+				System.out.println("request error");
+			response.sendError(429, "Too many requests!");
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+			return "error";
 		}
+		
+		repo.save(inMsg);
+		
+		return "contact";
+
+	}
 }
-
-
-

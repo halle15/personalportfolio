@@ -20,5 +20,9 @@ public class MessageInterceptorConfig implements WebMvcConfigurer{
         return registrationBean;
     }
 	
+	@Bean
+	public IPRateLimiter ipRateLimiter() {
+		return new IPRateLimiter();
+	}
 }
 
