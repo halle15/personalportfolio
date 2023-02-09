@@ -594,6 +594,8 @@ ul {
 	align-items: center;
 }
 
+
+
 #background {
 	display: flex;
 	flex-direction: column;
@@ -608,17 +610,23 @@ ul {
 	align-content: center;
 	flex-wrap: wrap;
 	background-size: cover;
+	justify-content: space-evenly;
+	height: 115%;
 }
 
-@media ( min-width : 980px) {
-	#background {
-		gap: 7.5vh;
+@media(min-width: 1600px){
+	
+	#background{
+	height: 100%;
 	}
 	
 }
+
+
 .nav-link{
 	font-size: calc(.50 * (1.25rem) + .75vw);;
 }
+
 #subtitle {
 	font-family: 'Vegur';
 	font-style: normal;
