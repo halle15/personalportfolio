@@ -242,6 +242,16 @@
 	flex-grow: 0;
 }
 
+@media ( max-width : 980px) {
+	.portfoliosholder {
+		text-align: center;
+
+	}
+	
+	.textframe{
+		width: 100%;
+	}
+}
 .dbg {
 	background: #1E1E1E;
 	color: #FFFFFF;
