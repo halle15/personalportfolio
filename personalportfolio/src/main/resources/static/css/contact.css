@@ -3,7 +3,7 @@
 
 
 .contact-form-label{
-	font-family: "Old Standard TT";
+	font-family: "TitilliumWeb";
 }
 .contact-page-container{
 	margin-inline: 3rem;
@@ -58,7 +58,7 @@
 	color: #FFFFFF;
 }
 .footer-section{
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	color: #FFFFFF;
 	
 	display: flex;
@@ -82,7 +82,7 @@
 	box-sizing: border-box;
 	/* Auto layout */
 	font-size: 1.75rem;
-	font-family: "Old Standard TT";
+	font-family: "TitilliumWeb";
 	color: white;
 	background: none;
 	padding: 15px 50px;
@@ -164,7 +164,7 @@
 }
 
 .portfoliodate {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	/* identical to box height */
@@ -176,7 +176,7 @@
 }
 
 .portfoliotitle {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	/* bpdytext */
@@ -403,7 +403,7 @@
 
 .titletext {
 	font-size: calc(1.75 * ( 1.375rem + 1.5vw));
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-weight: 500;
 	line-height: 44px;
 	/* identical to box height */
@@ -477,7 +477,7 @@
 	box-sizing: border-box;
 	/* Auto layout */
 	font-size: 1.75rem;
-	font-family: "Old Standard TT";
+	font-family: "TitilliumWeb";
 	color: white;
 	background: none;
 	display: flex;
@@ -512,7 +512,7 @@
 }
 
 #ctatitle {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-weight: 500;
 	line-height: 27px;
 	text-align: center;
@@ -524,7 +524,7 @@
 }
 
 #ctacontent {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
@@ -574,7 +574,7 @@ nav {
 }
 
 #bgtitle {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
@@ -593,7 +593,7 @@ nav {
 
 #bgsubtitle {
 	font-size: calc(( 1.25rem) + 1.25vw);
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	display: flex;
@@ -656,7 +656,7 @@ ul {
 #title {
 	width: 176px;
 	height: 44px;
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 36px;
@@ -675,17 +675,17 @@ body {
 }
 
 @font-face {
-	font-family: 'Vegur';
-	src: url('/font/Vegur.woff2') format('woff2');
+	font-family: 'TitilliumWeb';
+	src: url('/font/TitilliumWeb.woff2') format('woff2');
 }
-
+ 
 .navbar-nav{
-	font-family: Old Standard TT;
+	font-family: TitilliumWeb;
 	align-items: flex-start;
 }
 
 .navbar-brand {
-	font-family: Old Standard TT;
+	font-family: TitilliumWeb;
 }
 
 .navbar-brand-title {
