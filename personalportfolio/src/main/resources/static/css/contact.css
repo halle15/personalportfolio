@@ -111,7 +111,7 @@
 }
 
 .final-cta-text {
-	font-family: "Vegur";
+	font-family: "TitilliumWeb";
 	text-align: center;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .aboutme-section {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 }
 
 .imgframe {
@@ -152,7 +152,7 @@
 }
 
 .contenttext {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	color: #000000;
@@ -261,7 +261,7 @@
 }
 
 .whysectionsubtitle {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	font-weight: 400;
 	text-align: center;
 	/* Main */
@@ -417,7 +417,7 @@
 }
 
 .subtitletext {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	display: flex;
 	align-items: center;
 	text-align: center;
@@ -640,7 +640,7 @@ ul {
 	font-size: calc(.50 * (1.25rem) + .75vw);;
 }
 #subtitle {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 17px;
@@ -671,7 +671,7 @@ ul {
 }
 
 body {
-	font-family: "Vegur";
+	font-family: "TitilliumWeb";
 }
 
 @font-face {
@@ -696,6 +696,10 @@ body {
 .navbar-brand-subtitle {
 	font-style: italic;
 	color: gray;
+}
+
+.bg-theme{
+	background-color: #550caf;
 }
 
 .totalback{

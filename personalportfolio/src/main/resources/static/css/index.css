@@ -219,8 +219,13 @@
 	flex-grow: 0;
 }
 
+.text-bg-theme{
+	color: #fff!important;
+	background-color: #550caf;
+}
+
 .dbg {
-	background: #1E1E1E;
+	background: rgb(55, 7, 114);
 	color: #FFFFFF;
 }
 
@@ -522,7 +527,7 @@
 	align-items: center;
 	padding: 20px;
 	gap: 15px;
-	background: rgba(32, 32, 32, 0.8);
+	background: rgb(41, 6, 85);
 	border-radius: 10px;
 	/* Inside auto layout */
 	flex: none;
@@ -538,7 +543,7 @@
 	padding: 0px 10px;
 	gap: 15px;
 	/* shadow */
-	filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
+	filter: drop-shadow(0px 5px 4px rgba(85, 12, 175, .75));
 	/* Inside auto layout */
 	flex: none;
 	order: 2;
@@ -687,9 +692,13 @@ body {
 }
 
 .totalback{
-	
 	background-color: white;
 }
+
+.bg-theme{
+	background-color: #550caf;
+}
+
 html{
 	background-color: rgb(32, 32,32);
 }
