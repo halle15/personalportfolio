@@ -670,6 +670,11 @@ ul {
 	margin: -10px 0px;
 }
 
+.text-bg-theme{
+	color: #fff!important;
+	background-color: #550caf;
+}
+
 body {
 	font-family: "TitilliumWeb";
 }
