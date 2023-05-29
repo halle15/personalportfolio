@@ -238,6 +238,9 @@
 }
 }
 
+.text-muted{
+	color: #c9c9c9!important;	
+}
 
 .text-bg-theme{
 	color: #fff!important;
