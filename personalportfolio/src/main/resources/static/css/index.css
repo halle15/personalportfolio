@@ -543,7 +543,7 @@
 	padding: 0px 10px;
 	gap: 15px;
 	/* shadow */
-	filter: drop-shadow(0px 5px 4px rgba(85, 12, 175, .75));
+	filter: drop-shadow(0px 0px 16px rgba(85, 12, 175, .50));
 	/* Inside auto layout */
 	flex: none;
 	order: 2;

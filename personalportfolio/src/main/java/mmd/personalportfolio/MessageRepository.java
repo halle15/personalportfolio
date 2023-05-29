@@ -1,5 +1,6 @@
 package mmd.personalportfolio;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -28,4 +29,6 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
 	List<Message> findByName(String name);
 	
 	Message findById(long id);
+	
+	List<Message> findByDate(Date date);
 }
