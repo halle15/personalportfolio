@@ -3,7 +3,7 @@
 
 
 .contact-form-label{
-	font-family: "Old Standard TT";
+	font-family: "TitilliumWeb";
 }
 .contact-page-container{
 	margin-inline: 3rem;
@@ -58,7 +58,7 @@
 	color: #FFFFFF;
 }
 .footer-section{
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	color: #FFFFFF;
 	
 	display: flex;
@@ -82,7 +82,7 @@
 	box-sizing: border-box;
 	/* Auto layout */
 	font-size: 1.75rem;
-	font-family: "Old Standard TT";
+	font-family: "TitilliumWeb";
 	color: white;
 	background: none;
 	padding: 15px 50px;
@@ -111,7 +111,7 @@
 }
 
 .final-cta-text {
-	font-family: "Vegur";
+	font-family: "TitilliumWeb";
 	text-align: center;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .aboutme-section {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 }
 
 .imgframe {
@@ -152,7 +152,7 @@
 }
 
 .contenttext {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	color: #000000;
@@ -164,7 +164,7 @@
 }
 
 .portfoliodate {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	/* identical to box height */
@@ -176,7 +176,7 @@
 }
 
 .portfoliotitle {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	/* bpdytext */
@@ -242,6 +242,16 @@
 	flex-grow: 0;
 }
 
+@media ( max-width : 980px) {
+	.portfoliosholder {
+		text-align: center;
+
+	}
+	
+	.textframe{
+		width: 100%;
+	}
+}
 .dbg {
 	background: #1E1E1E;
 	color: #FFFFFF;
@@ -261,7 +271,7 @@
 }
 
 .whysectionsubtitle {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	font-weight: 400;
 	text-align: center;
 	/* Main */
@@ -403,7 +413,7 @@
 
 .titletext {
 	font-size: calc(1.75 * ( 1.375rem + 1.5vw));
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-weight: 500;
 	line-height: 44px;
 	/* identical to box height */
@@ -417,7 +427,7 @@
 }
 
 .subtitletext {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	display: flex;
 	align-items: center;
 	text-align: center;
@@ -477,7 +487,7 @@
 	box-sizing: border-box;
 	/* Auto layout */
 	font-size: 1.75rem;
-	font-family: "Old Standard TT";
+	font-family: "TitilliumWeb";
 	color: white;
 	background: none;
 	display: flex;
@@ -512,7 +522,7 @@
 }
 
 #ctatitle {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-weight: 500;
 	line-height: 27px;
 	text-align: center;
@@ -524,7 +534,7 @@
 }
 
 #ctacontent {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
@@ -574,7 +584,7 @@ nav {
 }
 
 #bgtitle {
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
@@ -593,7 +603,7 @@ nav {
 
 #bgsubtitle {
 	font-size: calc(( 1.25rem) + 1.25vw);
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	display: flex;
@@ -640,7 +650,7 @@ ul {
 	font-size: calc(.50 * (1.25rem) + .75vw);;
 }
 #subtitle {
-	font-family: 'Vegur';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 17px;
@@ -656,7 +666,7 @@ ul {
 #title {
 	width: 176px;
 	height: 44px;
-	font-family: 'Old Standard TT';
+	font-family: 'TitilliumWeb';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 36px;
@@ -670,22 +680,27 @@ ul {
 	margin: -10px 0px;
 }
 
+.text-bg-theme{
+	color: #fff!important;
+	background-color: #550caf;
+}
+
 body {
-	font-family: "Vegur";
+	font-family: "TitilliumWeb";
 }
 
 @font-face {
-	font-family: 'Vegur';
-	src: url('/font/Vegur.woff2') format('woff2');
+	font-family: 'TitilliumWeb';
+	src: url('/font/TitilliumWeb.woff2') format('woff2');
 }
-
+ 
 .navbar-nav{
-	font-family: Old Standard TT;
+	font-family: TitilliumWeb;
 	align-items: flex-start;
 }
 
 .navbar-brand {
-	font-family: Old Standard TT;
+	font-family: TitilliumWeb;
 }
 
 .navbar-brand-title {
@@ -698,12 +713,16 @@ body {
 	color: gray;
 }
 
+.bg-theme{
+	background-color: #550caf;
+}
+
 .totalback{
 	
 	background-color: white;
 }
 html{
-	background-color: rgb(32, 32,32);
+	background-color: #550caf;
 }
 @media ( max-width : 980px) {
 		.nav-link{
