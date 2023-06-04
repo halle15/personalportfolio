@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.nav-link{
+	font-size: calc(.50 * (1.25rem) + .75vw);;
+}
+
+.article-form {
+	margin: 5vh;
+	display: flex;
+	flex: auto;
+	flex-direction: column;
+	align-content: flex-start;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.bg-theme {
+	background-color: #550caf;
+}
+
+body {
+	font-family: "TitilliumWeb";
+}
+
+@font-face {
+	font-family: 'TitilliumWeb';
+	src: url('/font/TitilliumWeb.woff2') format('woff2');
+}
+
+.navbar-nav {
+	font-family: TitilliumWeb;
+	align-items: flex-start;
+}
+
+.navbar-brand {
+	font-family: TitilliumWeb;
+}
+
+.navbar-brand-title {
+	font-size: larger;
+	font-weight: bold;
+}
+
+.navbar-brand-subtitle {
+	font-style: italic;
+	color: gray;
+}

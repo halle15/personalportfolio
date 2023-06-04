@@ -102,8 +102,7 @@ public class PersonalPortfolioController {
 	@GetMapping(value = "/blog/read")
 	public String read(Integer id, Model model) {
 		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
-		model.addAttribute("article", ar.findAll().get(id));
-		System.out.println(id);
+		model.addAttribute("article", ar.findAll().get(id)); // TODO: please let's find a way not to suck up the entire db
 		return "read";
 	}
 
