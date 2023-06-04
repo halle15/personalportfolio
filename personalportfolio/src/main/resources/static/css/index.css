@@ -723,7 +723,7 @@ body {
 }
 
 html{
-	background-color: rgb(32, 32,32);
+	background-color: #550caf;
 }
 @media ( max-width : 980px) {
 		.nav-link{
