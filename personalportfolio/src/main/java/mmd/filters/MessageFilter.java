@@ -1,4 +1,4 @@
-package mmd.personalportfolio;
+package mmd.filters;
 
 import java.io.IOException;
 

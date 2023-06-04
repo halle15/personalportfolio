@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import mmd.filters.IPRateLimiter;
+import mmd.filters.MessageFilter;
+
 
 @Configuration
 public class MessageInterceptorConfig implements WebMvcConfigurer{
