@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.margin-5{
+	margin: 5%;
+}
+
 .footer{
 	border: 0px;
 	border-color: transparent;
@@ -222,6 +226,8 @@
 }
 
 .button-group{
+	justify-content: center;
+    align-items: center;
 	display: flex;
 	gap: 3rem;
 }
@@ -639,7 +645,6 @@ ul {
 	flex-wrap: nowrap;
 	background-size: cover;
 	justify-content: space-evenly;
-	height: 125%;
 }
 
 @media(min-width: 1600px){
