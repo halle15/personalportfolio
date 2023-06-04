@@ -645,6 +645,7 @@ ul {
 	flex-wrap: nowrap;
 	background-size: cover;
 	justify-content: space-evenly;
+	height: 125%;
 }
 
 @media(min-width: 1600px){
