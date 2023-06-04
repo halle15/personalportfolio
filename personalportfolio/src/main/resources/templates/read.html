@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Read Article</title>
+</head>
+<body>
+    <h1>Read Article</h1>
+    <h2>Title: <span th:text="${article.title}"></span></h2>
+    <h3>Author: <span th:text="${article.author}"></span></h3>
+    <p>Description: <span th:text="${article.desc}"></span></p>
+    <p>Content: <span th:text="${article.text}"></span></p>
+    <p>Main Image: <img th:src="${article.mainImg}" alt="Main Image"></p>
+    <p>Additional Images:</p>
+    <ul>
+        <li th:each="image : ${article.images}" th:text="${image}"></li>
+    </ul>
+    <p>Main Tag: <span th:text="${article.mainTag}"></span></p>
+    <p>Tags:</p>
+    <ul>
+        <li th:each="tag : ${article.tags}" th:text="${tag}"></li>
+    </ul>
+    <p>Publication Date: <span th:text="${article.pubDate}"></span></p>
+</body>
+</html>

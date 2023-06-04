@@ -1,13 +1,17 @@
 package mmd.personalportfolio;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +26,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class PersonalPortfolioController {
-
-	MessageRepository repo;
+	
+	Map<String, CrudRepository<?, ?>> repositoryMap = new HashMap<>();
+	
 	IPRateLimiter limiter;
 
-	PersonalPortfolioController(MessageRepository repo, IPRateLimiter limiter) {
-		this.repo = repo;
+	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter) {
+		repositoryMap.put("messageRepo", messageRepo);
+		repositoryMap.put("articleRepo", articleRepo);
+		
 		this.limiter = limiter;
 	}
 	/*
@@ -67,6 +74,14 @@ public class PersonalPortfolioController {
 	public String blog() {
 		return "article";
 	}
+	
+	@GetMapping(value = "/blog/read")
+	public String read(Integer id, Model model) {
+		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
+		model.addAttribute("article", ar.findAll().get(id));
+		System.out.println(id);
+		return "read";
+	}
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
@@ -85,7 +100,9 @@ public class PersonalPortfolioController {
 			return "error";
 		}
 		
-		repo.save(inMsg);
+		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+		
+		mr.save(inMsg);
 		
 		return "contact";
 
