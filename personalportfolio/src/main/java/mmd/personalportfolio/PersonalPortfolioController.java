@@ -67,6 +67,7 @@ public class PersonalPortfolioController {
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
 			@RequestParam String email, @RequestParam String message) {
 		Message inMsg = new Message(name, email, message);
+		System.out.println(inMsg.toString());
 		
 		if(!limiter.tryAcquire(request.getRemoteAddr())) {
 			try {
