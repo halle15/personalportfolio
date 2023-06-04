@@ -1,4 +1,4 @@
-package mmd.personalportfolio;
+package mmd.filters;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
