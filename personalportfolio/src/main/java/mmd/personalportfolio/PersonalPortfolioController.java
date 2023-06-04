@@ -62,6 +62,11 @@ public class PersonalPortfolioController {
 	public String error() {
 		return "error";
 	}
+	
+	@GetMapping(value = "/blog")
+	public String blog() {
+		return "article";
+	}
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,

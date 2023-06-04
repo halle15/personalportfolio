@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Article</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault();
+                
+                var formData = {
+                    title: $('#title').val(),
+                    author: $('#author').val(),
+                    desc: $('#desc').val(),
+                    text: $('#text').val(),
+                    mainImg: $('#mainImg').val(),
+                    images: $('#images').val().split(','),
+                    mainTag: $('#mainTag').val(),
+                    tags: $('#tags').val().split(','),
+                    pubDate: $('#pubDate').val()
+                };
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/articles',
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        alert('Article added successfully!');
+                        // Optionally redirect to another page or perform any other action
+                    },
+                    error: function(error) {
+                        alert('An error occurred while adding the article.');
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>REMOVE WHEN FINISHED TESTING! Add Article</h1>
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required><br><br>
+        
+        <label for="desc">Description:</label>
+        <textarea id="desc" name="desc" rows="4" cols="50" required></textarea><br><br>
+        
+        <label for="text">Content:</label>
+        <textarea id="text" name="text" rows="10" cols="50" required></textarea><br><br>
+        
+        <label for="mainImg">Main Image URL:</label>
+        <input type="text" id="mainImg" name="mainImg"><br><br>
+        
+        <label for="images">Additional Images (comma-separated):</label>
+        <input type="text" id="images" name="images"><br><br>
+        
+        <label for="mainTag">Main Tag:</label>
+        <input type="text" id="mainTag" name="mainTag"><br><br>
+        
+        <label for="tags">Tags (comma-separated):</label>
+        <input type="text" id="tags" name="tags"><br><br>
+        
+        <label for="pubDate">Publication Date:</label>
+        <input type="date" id="pubDate" name="pubDate"><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
