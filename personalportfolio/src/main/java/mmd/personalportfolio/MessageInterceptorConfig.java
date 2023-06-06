@@ -8,17 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import mmd.filters.IPRateLimiter;
+
 
 @Configuration
 public class MessageInterceptorConfig implements WebMvcConfigurer{
-	
-	@Bean
-    public FilterRegistrationBean<MessageFilter> filterRegistrationBean() {
-        FilterRegistrationBean<MessageFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new MessageFilter());
-        registrationBean.addUrlPatterns("/messages");
-        return registrationBean;
-    }
 	
 	@Bean
 	public IPRateLimiter ipRateLimiter() {

@@ -1,13 +1,18 @@
 package mmd.personalportfolio;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,17 +22,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ch.qos.logback.classic.Logger;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mmd.filters.IPRateLimiter;
+import mmd.models.Message;
+import mmd.repositories.ArticleRepository;
+import mmd.repositories.MessageRepository;
 
 @Controller
 public class PersonalPortfolioController {
 
-	MessageRepository repo;
+	Map<String, CrudRepository<?, ?>> repositoryMap = new HashMap<>();
+
 	IPRateLimiter limiter;
 
-	PersonalPortfolioController(MessageRepository repo, IPRateLimiter limiter) {
-		this.repo = repo;
+	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter) {
+		repositoryMap.put("messageRepo", messageRepo);
+		repositoryMap.put("articleRepo", articleRepo);
+
 		this.limiter = limiter;
 	}
 	/*
@@ -44,8 +57,26 @@ public class PersonalPortfolioController {
 	}
 
 	@GetMapping(value = "/")
-	public String index() {
+	public String index(HttpServletRequest request, Model model, Authentication auth) {
+
+		boolean isAdmin = false;
+		String ipAddr = request.getHeader("X-Real-IP");
+		
+		try {
+			if (ipAddr.equals("192.168.1.1") || ipAddr.equals("47.224.71.176") || auth.isAuthenticated()) {
+				isAdmin = true;
+			}
+		} catch (NullPointerException e) {
+			System.out.println("headerIP fail!");
+		}
+
+		model.addAttribute("isAdminIP", isAdmin); 
 		return "index";
+	}
+
+	@GetMapping(value = "/login")
+	public String login(Model model) {
+		return "login";
 	}
 
 	@GetMapping(value = "/home")
@@ -63,26 +94,47 @@ public class PersonalPortfolioController {
 		return "error";
 	}
 
+	@GetMapping(value = "/blog")
+	public String blog() {
+		return "article";
+	}
+
+	@GetMapping(value = "/blog/read")
+	public String read(Integer id, Model model) {
+		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
+		model.addAttribute("article", ar.findAll().get(id)); // TODO: please let's find a way not to suck up the entire db
+		return "read";
+	}
+
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
 			@RequestParam String email, @RequestParam String message) {
 		Message inMsg = new Message(name, email, message);
 		System.out.println(inMsg.toString());
-		
-		if(!limiter.tryAcquire(request.getRemoteAddr())) {
+
+		if (!limiter.tryAcquire(request.getRemoteAddr())) {
 			try {
 				System.out.println("request error");
-			response.sendError(429, "Too many requests!");
-			}
-			catch (Exception e) {
+				response.sendError(429, "Too many requests!");
+			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			return "error";
 		}
-		
-		repo.save(inMsg);
-		
+
+		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+
+		mr.save(inMsg);
+
 		return "contact";
 
+	}
+	
+	
+	// ADMIN SECTION
+	
+	@GetMapping(value = "/admin")
+	public String admin(Model model) {
+		return "admin";
 	}
 }

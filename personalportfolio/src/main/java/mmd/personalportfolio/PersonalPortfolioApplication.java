@@ -5,12 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import mmd.models.Message;
+import mmd.repositories.MessageRepository;
+
 
 @SpringBootApplication
-public class PersonalportfolioApplication {
+public class PersonalPortfolioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PersonalportfolioApplication.class, args);
+		SpringApplication.run(PersonalPortfolioApplication.class, args);
 	}
 	
 	@Bean

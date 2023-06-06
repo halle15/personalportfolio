@@ -1,4 +1,4 @@
-package mmd.personalportfolio;
+package mmd.filters;
 
 import java.time.Duration;
 import java.util.HashMap;
