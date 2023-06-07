@@ -1,0 +1,78 @@
+@charset "ISO-8859-1";
+
+button {
+	background-color: #d82020;
+	color: white;
+	border: gray;
+	border-radius: 5px 5px 5px 5px;
+}
+
+h4 {
+	margin-bottom: 0;
+}
+
+div > h1{
+	text-align: center;
+}
+
+.message-infoholder {
+	display: flex;
+	gap: 1em;
+}
+
+.message-container {
+	margin: 1em;
+	gap: 1em;
+}
+
+.message-box {
+	border-radius: 1em;
+	padding: 1em;
+	margin: 2.5em;
+}
+
+body {
+	font-family: "TitilliumWeb";
+}
+
+/*
+	UTILITY CLASSES
+*/
+.bg-theme {
+	background-color: #550caf;
+	color: white;
+}
+
+/*
+	NAVBAR
+*/
+.navbar-brand {
+	font-size: 2em;
+}
+
+.navbar-toggler-icon {
+	width: 1.5em;
+	height: 1.5em;
+	vertical-align: middle;
+}
+
+.nav-link {
+	color: #a9a9a9;
+	font-size: 1.5em;
+}
+
+.active-link, .navbar-brand, .navbar-brand:hover {
+	color: white;
+}
+
+.active-link:hover, .nav-link:hover {
+	color: orange;
+}
+
+/*
+	FONT CLASSES
+*/
+@font-face {
+	font-family: 'TitilliumWeb';
+	src: url('/font/TitilliumWeb.woff2') format('woff2');
+}

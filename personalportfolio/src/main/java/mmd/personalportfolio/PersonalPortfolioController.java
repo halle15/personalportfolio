@@ -138,4 +138,9 @@ public class PersonalPortfolioController {
 	public String admin(Model model) {
 		return "admin";
 	}
+	
+	@GetMapping(value = "/admin/messages")
+	public String adminMessageViewer(Model model) {
+		return "messageviewer";
+	}
 }

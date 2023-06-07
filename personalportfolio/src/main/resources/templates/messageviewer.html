@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Dashboard - Message Viewer</title>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/css/messagepanel.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg bg-theme">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Admin Panel</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav navbar-nav-scroll">
+					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin">Admin
+							Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page"
+						href="/blog">Article Editor</a></li>
+					<li class="nav-item"><a class="nav-link" href="/blog">Articles</a>
+					</li>
+					<li class="nav-item"><a class="nav-link active-link"
+						href="/admin/messages">Messages</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="message-container">
+		
+		<h1>Your Messages</h1>
+	
+		<div class="message-box bg-theme">
+			<h2>Message from BLAH BLAH</h2>
+			<div class="message-infoholder">
+				<h4>someone@somewhere.com</h4>
+				<h4>6/06/1996</h4>
+				<button>Delete</button>
+			</div>
+			<div>Hey there! I hope you're having a great day. As a full
+				stack developer, I wanted to reach out and ask you a few (perhaps
+				silly) questions. Please bear with me! 1. Is it possible to make a
+				website invisible to the entire universe, except for me and my cat?
+				2. Can I make my code run faster by adding more emojis? 3. How can I
+				make my website respond to my mood? Like, when I'm happy, it should
+				display fireworks and unicorns! 4. Is there a way to train my
+				website to make coffee and deliver it to me while I'm coding? 5. Can
+				you recommend a CSS property that turns my website into a time
+				machine? I know these questions might sound absurd, but I'm just
+				curious about the limits of web development. Your expertise and
+				guidance would be greatly appreciated! Looking forward to your
+				response, and thank you in advance for your patience with my
+				silliness.</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>
