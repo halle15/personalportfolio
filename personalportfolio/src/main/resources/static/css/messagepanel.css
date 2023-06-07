@@ -17,18 +17,18 @@
 }
 
 .button-group > button:hover {
-  background-color: #2e065e; /* Darker shade of purple on hover */
+  background-color: #2e065e; 
 }
 
 .button-group > button:focus {
-  outline: none; /* Remove the default focus outline */
+  outline: none; 
   box-shadow: 0 0 0 2px white; /* Add a white box-shadow when button is focused */
 }
 
 .button-group{
 	display: grid;
   	grid-template-columns: repeat(2, 1fr); /* Creates a grid with 2 equally-sized columns */
-  	grid-gap: 5em; /* Adjust the gap between buttons */
+  	grid-gap: 5em; 
   	
   	margin-inline: 2em;
   	margin-bottom: 2em;

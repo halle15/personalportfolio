@@ -15,11 +15,9 @@ import mmd.models.Message;
 @RepositoryRestResource(collectionResourceRel = "messages", path = "messages")
 public interface MessageRepository extends CrudRepository<Message, Long>{
 	@Override
-    @RestResource(exported = false)
     void deleteById(Long id);
 
     @Override
-    @RestResource(exported = false)
     void delete(Message entity);
 
     @Override
