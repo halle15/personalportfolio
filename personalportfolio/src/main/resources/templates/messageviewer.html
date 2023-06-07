@@ -43,9 +43,23 @@
 	</nav>
 
 	<div class="message-container">
-		
+
 		<h1>Your Messages</h1>
-	
+
+
+		<div class="message-box bg-theme" th:each="message : ${messageList}">
+			<h2 th:text="'Message from ' + ${message.name}"></h2>
+			<div class="message-infoholder">
+				<h4 th:text="${message.email}"></h4>
+				<h4 th:text="${message.date}"></h4>
+				<button>Delete</button>
+			</div>
+			<hr>
+			<div th:text="${message.message}"></div>
+		</div>
+
+
+
 		<div class="message-box bg-theme">
 			<h2>Message from BLAH BLAH</h2>
 			<div class="message-infoholder">

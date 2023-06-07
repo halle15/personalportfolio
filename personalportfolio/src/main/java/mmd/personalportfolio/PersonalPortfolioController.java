@@ -2,10 +2,13 @@ package mmd.personalportfolio;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -140,7 +143,17 @@ public class PersonalPortfolioController {
 	}
 	
 	@GetMapping(value = "/admin/messages")
-	public String adminMessageViewer(Model model) {
+	public String adminMessageViewer(Model model, @RequestParam(defaultValue = "0") int page) {
+		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+		
+		Pageable pageable = PageRequest.of(page, 10);
+		
+		Iterable<Message> messageList = mr.findAll(pageable);
+		
+		model.addAttribute("messageList", messageList);
+	
 		return "messageviewer";
 	}
+	
+
 }
