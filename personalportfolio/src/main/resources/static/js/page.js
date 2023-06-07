@@ -1,12 +1,7 @@
 function switchPage(dir) {
 	
-	console.log(dir);
 
 	var currentPage = new URLSearchParams(window.location.search).get('page');
-
-	if (typeof currentPage !== "number") {
-		//currentPage = 0;
-	}
 
 	if (dir !== 0 && dir !== 1) {
 		console.error("Direction not registered!");
