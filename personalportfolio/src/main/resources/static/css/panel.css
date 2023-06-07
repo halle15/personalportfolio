@@ -1,11 +1,8 @@
 @charset "UTF-8";
 
-.nav-link{
-	font-size: calc(.50 * (1.25rem) + .75vw);;
-}
-
-.article-form {
-	margin: 5vh;
+form {
+	gap: 1em;
+	margin: 2.5em;
 	display: flex;
 	flex: auto;
 	flex-direction: column;
@@ -25,23 +22,4 @@ body {
 @font-face {
 	font-family: 'TitilliumWeb';
 	src: url('/font/TitilliumWeb.woff2') format('woff2');
-}
-
-.navbar-nav {
-	font-family: TitilliumWeb;
-	align-items: flex-start;
-}
-
-.navbar-brand {
-	font-family: TitilliumWeb;
-}
-
-.navbar-brand-title {
-	font-size: larger;
-	font-weight: bold;
-}
-
-.navbar-brand-subtitle {
-	font-style: italic;
-	color: gray;
 }

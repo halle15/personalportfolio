@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-	function rs() {
+	/*function rs() {  deprecated, issues with navbar
 		const navbar = document.querySelector('.navbar');
 		const form = document.querySelector('.all');
-		form.style.marginTop = navbar.offsetHeight + 'px';
+		form.style.marginTop = navbar.clientHeight + 'px';
 	}
 	
 	rs();
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	window.addEventListener('resize', function() {
 		rs();
 	});
+	*/
 
 	$('form').submit(function(event) {
 		event.preventDefault();

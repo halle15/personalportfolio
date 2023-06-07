@@ -98,11 +98,12 @@ public class PersonalPortfolioController {
 	public String blog() {
 		return "article";
 	}
-
+	
 	@GetMapping(value = "/blog/read")
 	public String read(Integer id, Model model) {
 		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
 		model.addAttribute("article", ar.findAll().get(id)); // TODO: please let's find a way not to suck up the entire db
+		// TODO: We need to find a way to handle the IndexOutOfBoundsException
 		return "read";
 	}
 
