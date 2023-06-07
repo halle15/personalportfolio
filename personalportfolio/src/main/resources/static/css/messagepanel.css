@@ -1,6 +1,41 @@
 @charset "ISO-8859-1";
 
-button {
+.button-group > button > svg{
+	height: 2em;
+}
+
+.button-group > button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-group > button:hover {
+  background-color: #2e065e; /* Darker shade of purple on hover */
+}
+
+.button-group > button:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 2px white; /* Add a white box-shadow when button is focused */
+}
+
+.button-group{
+	display: grid;
+  	grid-template-columns: repeat(2, 1fr); /* Creates a grid with 2 equally-sized columns */
+  	grid-gap: 5em; /* Adjust the gap between buttons */
+  	
+  	margin-inline: 2em;
+  	margin-bottom: 2em;
+  	height: 5em;
+}
+
+.delete-button{
 	background-color: #d82020;
 	color: white;
 	border: gray;
