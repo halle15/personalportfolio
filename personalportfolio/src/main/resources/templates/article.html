@@ -39,36 +39,38 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav navbar-nav-scroll">
 					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin">Admin Dashboard</a>
-					</li>
-					<li class="nav-item"><a class="nav-link active-link" aria-current="page" href="/blog">Article Editor</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/blog/articles">Articles</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/blog/articles">Messages</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="/admin">Admin Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link active-link" aria-current="page" href="/admin/newArticle" th:text="${isEdit} ? 'Editing Article' : 'New Article'"></a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/articles">Articles</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/messages">Messages</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	
 	<div class="form-container">
-		<form>
+		<form th:object="${article}" id="article-box" th:attr="isEdit=${isEdit}">
 			
 			<h1>REMOVE WHEN FINISHED TESTING! Add Article</h1>
 			
-			<label for="title">Title:</label> <input type="text" id="title" name="title" required>  
-			<label for="author">Author:</label> <input type="text" id="author" name="author" required>  
+			<label for="title">Title:</label> 
+				<input type="text" id="title" name="title" th:value="${article?.title}" required>  
+			<label for="author">Author:</label> 
+				<input type="text" id="author" name="author" th:value="${article?.author}" required> 
 			<label for="desc">Description:</label>
-			<textarea id="desc" name="desc" rows="4" cols="50" required></textarea>  
+				<textarea id="desc" name="desc" rows="4" cols="50" th:text="${article?.desc}" required></textarea>  
 			<label for="text">Content:</label>
-			<textarea id="text" name="text" rows="10" cols="50" required></textarea>
-			<label for="mainImg">Main Image URL:</label> <input type="text" id="mainImg" name="mainImg"> 
-
-			<label for="images">Additional Images (comma-separated):</label> <input type="text" id="images" name="images">  
-			<label for="mainTag">Main Tag:</label> <input type="text" id="mainTag" name="mainTag">  
-			<label for="tags">Tags (comma-separated):</label> <input type="text" id="tags" name="tags">
-			<label for="pubDate">Publication Date:</label> <input type="date" id="pubDate" name="pubDate"> 
+				<textarea id="text" name="text" rows="10" cols="50" th:text="${article?.text}" required></textarea>
+			<label for="mainImg">Main Image URL:</label> 
+				<input type="text" id="mainImg" th:value="${article?.mainImg}" name="mainImg"> 
+			<label for="images">Additional Images (comma-separated):</label> 
+				<input type="text" id="images" name="images" th:value="${article?.images}">  
+			<label for="mainTag">Main Tag:</label> 
+				<input type="text" id="mainTag" name="mainTag" th:value="${article?.mainTag}">  
+			<label for="tags">Tags (comma-separated):</label> 
+				<input type="text" id="tags" name="tags" th:value="${article?.tags}">
+			<label for="pubDate">Publication Date:</label> 
+				<input type="date" id="pubDate" name="pubDate" th:value="${article?.pubDate}"> 
 			<button type="submit" class="bg-theme">Submit</button>
 		</form>
 	</div>
