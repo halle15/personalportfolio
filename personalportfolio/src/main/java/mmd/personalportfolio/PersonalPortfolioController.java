@@ -100,8 +100,8 @@ public class PersonalPortfolioController {
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
-			@RequestParam String email, @RequestParam String message) {
-		Message inMsg = new Message(name, email, message);
+			@RequestParam String contactInfo, @RequestParam String message) {
+		Message inMsg = new Message(name, contactInfo, message);
 		System.out.println(inMsg.toString());
 
 		if (!limiter.tryAcquire(request.getRemoteAddr())) {

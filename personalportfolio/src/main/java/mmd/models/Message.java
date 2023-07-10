@@ -10,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-// sample post request curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john.doe@example.com\",\"message\":\"This is a sample message.\"}" http://localhost:8080/messages
+// sample post request curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"contactInfo\":\"john.doe@example.com\",\"message\":\"This is a sample message.\"}" http://localhost:8080/messages
 
 @Entity
 public class Message {
@@ -19,7 +19,7 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long id;
 	String name;
-	String email;
+	String contactInfo;
 	String message;
 
 	@DateTimeFormat
@@ -42,7 +42,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", name=" + name + ", email=" + email + ", message=" + message + ", date=" + date
+		return "Message [id=" + id + ", name=" + name + ", contactInfo=" + contactInfo + ", message=" + message + ", date=" + date
 				+ "]";
 	}
 
@@ -50,12 +50,12 @@ public class Message {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getContactInfo() {
+		return contactInfo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setContactInfo(String email) {
+		this.contactInfo = email;
 	}
 
 	public String getMessage() {
@@ -74,10 +74,10 @@ public class Message {
 		this.date = date;
 	}
 
-	public Message(String name, String email, String message) {
+	public Message(String name, String contactInfo, String message) {
 		super();
 		this.name = name;
-		this.email = email;
+		this.contactInfo = contactInfo;
 		this.message = message;
 		this.date = Date.from(Instant.now());
 	}
