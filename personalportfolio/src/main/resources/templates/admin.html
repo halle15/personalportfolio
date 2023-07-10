@@ -30,21 +30,35 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav navbar-nav-scroll">
 					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link active-link" aria-current="page" href="/admin">Admin Dashboard</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/newArticle">New Article</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/articles">Articles</a></li>
+					<li class="nav-item"><a class="nav-link active-link"
+						aria-current="page" href="/admin">Admin Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/newArticle">New Article</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/articles">Articles</a></li>
 					<li class="nav-item"><a class="nav-link" href="admin/messages">Messages</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div class="links">
-		<a href="/admin/messages">Message Board</a> <a href="/blog">New
-			Article</a> <a href="/blog/articles">Edit Articles</a> <a href="/blog">Read
-			Articles</a> <a href="/logout">Logout</a>
+	<div class="content-div">
+		<div class="links">
+
+			<h1>Admin Panel Links</h1>
+
+			<button onclick="location.href='/admin/messages'" type="button">Message
+				Board</button>
+			<button onclick="location.href='/blog'" type="button">Read
+				Articles</button>
+			<button onclick="location.href='/blog'" type="button">New
+				Article</button>
+			<button onclick="location.href='/blog/articles'" type="button">Edit
+				Articles</button>
+			<button onclick="location.href='/logout'" type="button">Logout</button>
+
+		</div>
 	</div>
-	
 
 </body>
 </html>
