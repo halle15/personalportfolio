@@ -22,7 +22,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests((requests) -> requests
 					
 					.requestMatchers("/putmessage").permitAll()
-		            //.requestMatchers(HttpMethod.GET, "/message", "/messages", "/blog/**", "/admin").authenticated() TODO: uncomment in prod
+		            //.requestMatchers(HttpMethod.GET, "/message", "/messages", "/blog/**", "/admin").authenticated() 
 		            .anyRequest().permitAll()
 			)
 			.formLogin((form) -> form

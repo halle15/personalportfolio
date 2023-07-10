@@ -1,0 +1,114 @@
+@charset "ISO-8859-1";
+
+.button-group > button > svg{
+	height: 2em;
+}
+
+.button-group > button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-group > button:hover {
+  background-color: #2e065e; 
+}
+
+.button-group > button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px white; /* Add a white box-shadow when button is focused */
+}
+
+.button-group{
+	display: grid;
+  	grid-template-columns: repeat(2, 1fr); /* Creates a grid with 2 equally-sized columns */
+  	grid-gap: 5em; 
+  	
+  	margin-inline: 2em;
+  	margin-bottom: 2em;
+  	height: 5em;
+}
+
+.delete-button{
+	background-color: #d82020;
+	color: white;
+	border: gray;
+	border-radius: 5px 5px 5px 5px;
+}
+
+h4 {
+	margin-bottom: 0;
+}
+
+div > h1{
+	text-align: center;
+}
+
+.article-infoholder {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+
+.article-container {
+	margin: 1em;
+	gap: 1em;
+}
+
+.article-box {
+	border-radius: 1em;
+	padding: 1em;
+	margin: 2.5em;
+}
+
+body {
+	font-family: "TitilliumWeb";
+}
+
+/*
+	UTILITY CLASSES
+*/
+.bg-theme {
+	background-color: #550caf;
+	color: white;
+}
+
+/*
+	NAVBAR
+*/
+.navbar-brand {
+	font-size: 2em;
+}
+
+.navbar-toggler-icon {
+	width: 1.5em;
+	height: 1.5em;
+	vertical-align: middle;
+}
+
+.nav-link {
+	color: #a9a9a9;
+	font-size: 1.5em;
+}
+
+.active-link, .navbar-brand, .navbar-brand:hover {
+	color: white;
+}
+
+.active-link:hover, .nav-link:hover {
+	color: orange;
+}
+
+/*
+	FONT CLASSES
+*/
+@font-face {
+	font-family: 'TitilliumWeb';
+	src: url('/font/TitilliumWeb.woff2') format('woff2');
+}

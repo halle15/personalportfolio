@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>mmd</groupId>
 	<artifactId>personalportfolio</artifactId>
-	<version>0.0.2-RELEASE</version>
+	<version>0.0.3-RELEASE</version>
 	<name>personalportfolio</name>
 	<description>Personal Spring Boot Portfolio for Evann Hall</description>
 	<properties>

@@ -3,6 +3,8 @@ package mmd.repositories;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -13,11 +15,9 @@ import mmd.models.Message;
 @RepositoryRestResource(collectionResourceRel = "messages", path = "messages")
 public interface MessageRepository extends CrudRepository<Message, Long>{
 	@Override
-    @RestResource(exported = false)
     void deleteById(Long id);
 
     @Override
-    @RestResource(exported = false)
     void delete(Message entity);
 
     @Override
@@ -33,4 +33,6 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
 	Message findById(long id);
 	
 	List<Message> findByDate(Date date);
+	
+	Page<Message> findAll(Pageable pageable);
 }

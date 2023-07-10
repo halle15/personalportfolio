@@ -17,13 +17,21 @@ public class Message {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	public long id;
 	String name;
 	String email;
 	String message;
 
 	@DateTimeFormat
 	Date date;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	protected Message() {
 	}

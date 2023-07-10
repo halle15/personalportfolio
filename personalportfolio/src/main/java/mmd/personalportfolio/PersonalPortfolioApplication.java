@@ -19,7 +19,9 @@ public class PersonalPortfolioApplication {
 	@Bean
 	public CommandLineRunner demo(MessageRepository repo) {
 		return (args) -> {
-			repo.save(new Message("Michael", "mball@balls.com", "Hello!"));
+			for(int i = 0; i < 11; i++) {
+			repo.save(new Message("Michael the " + i + "th", "mball@balls.com", "Hello!"));
+			}
 			System.out.println("REPO: " + repo.findAll());
 			
 		};

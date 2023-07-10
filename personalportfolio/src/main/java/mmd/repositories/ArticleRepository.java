@@ -14,12 +14,13 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 	@RestResource(exported = false)
 	<S extends Article> List<S> saveAll(Iterable<S> entities);
 
+    @Override
+    <S extends Article> S save(S entity);
+	
 	@Override
-	@RestResource(exported = false)
 	void deleteById(String id);
 
 	@Override
-	@RestResource(exported = false)
 	void delete(Article entity);
 
 	@Override

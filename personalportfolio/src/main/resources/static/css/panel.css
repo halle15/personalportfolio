@@ -1,47 +1,117 @@
 @charset "UTF-8";
 
-.nav-link{
-	font-size: calc(.50 * (1.25rem) + .75vw);;
-}
-
-.article-form {
-	margin: 5vh;
+/* TODO: implement more robust solution*/
+.content-div{
 	display: flex;
-	flex: auto;
-	flex-direction: column;
-	align-content: flex-start;
 	justify-content: center;
-	align-items: stretch;
 }
 
-.bg-theme {
-	background-color: #550caf;
+.links {
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 33rem; 
+}
+
+.links>button{
+    font-size: clamp(28px, 5%, 2.5rem);;
+    filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
+    color: white;
+    background: #550caf;
+    width: 100%; /* Full width of the parent */
+    margin: 5px;
+    border: none; 
+    padding: 10px; 
+    text-align: center; 
+}
+
+button {
+    filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.75));
+    color: white;
+    background: none;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer; /* Change cursor to pointer when hover on the button */
+}
+
+.form-container {
+	margin-left: 1em;
+	margin-right: 1em;
+	display: flex;
+	justify-content: center;
+}
+
+form {
+	max-width: 900px;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	margin: 1.5em;
+}
+
+form>label {
+	font-size: clamp(28px, 5%, 2.5rem);
+}
+
+/*
+form>input{
+	height: 250px;
+}
+*/
+form>button {
+	border: 1.5px solid gray;
+}
+
+h1 {
+	text-align: center;
+	font-size: clamp(32px, 5%, 2.75rem);
 }
 
 body {
 	font-family: "TitilliumWeb";
 }
 
+/*
+	UTILITY CLASSES
+*/
+.bg-theme {
+	background-color: #550caf;
+}
+
+/*
+	NAVBAR
+*/
+.navbar-brand {
+	font-size: 2em;
+}
+
+.navbar-toggler-icon {
+	width: 1.5em;
+	height: 1.5em;
+	vertical-align: middle;
+}
+
+.nav-link {
+	color: #a9a9a9;
+	font-size: 1.5em;
+}
+
+.active-link, .navbar-brand, .navbar-brand:hover {
+	color: white;
+}
+
+.active-link:hover, .nav-link:hover {
+	color: orange;
+}
+
+/*
+	FONT CLASSES
+*/
 @font-face {
 	font-family: 'TitilliumWeb';
 	src: url('/font/TitilliumWeb.woff2') format('woff2');
-}
-
-.navbar-nav {
-	font-family: TitilliumWeb;
-	align-items: flex-start;
-}
-
-.navbar-brand {
-	font-family: TitilliumWeb;
-}
-
-.navbar-brand-title {
-	font-size: larger;
-	font-weight: bold;
-}
-
-.navbar-brand-subtitle {
-	font-style: italic;
-	color: gray;
 }

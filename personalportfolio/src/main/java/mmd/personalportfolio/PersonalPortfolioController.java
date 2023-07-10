@@ -2,10 +2,13 @@ package mmd.personalportfolio;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,7 @@ import ch.qos.logback.classic.Logger;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mmd.filters.IPRateLimiter;
+import mmd.models.Article;
 import mmd.models.Message;
 import mmd.repositories.ArticleRepository;
 import mmd.repositories.MessageRepository;
@@ -94,18 +98,6 @@ public class PersonalPortfolioController {
 		return "error";
 	}
 
-	@GetMapping(value = "/blog")
-	public String blog() {
-		return "article";
-	}
-
-	@GetMapping(value = "/blog/read")
-	public String read(Integer id, Model model) {
-		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
-		model.addAttribute("article", ar.findAll().get(id)); // TODO: please let's find a way not to suck up the entire db
-		return "read";
-	}
-
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
 			@RequestParam String email, @RequestParam String message) {
@@ -137,4 +129,74 @@ public class PersonalPortfolioController {
 	public String admin(Model model) {
 		return "admin";
 	}
+	
+	@GetMapping(value = "/admin/messages")
+	public String adminMessageViewer(Model model, @RequestParam(defaultValue = "0") int page) {
+		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+		
+		Pageable pageable = PageRequest.of(page, 10);
+		
+		Iterable<Message> messageList = mr.findAll(pageable);
+		
+		model.addAttribute("messageList", messageList);
+	
+		return "messageviewer";
+	}
+	
+	@GetMapping(value = "/admin/articles")
+	public String adminArticleViewer(Model model, @RequestParam(defaultValue = "0") int page) {
+		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
+		
+		Pageable pageable = PageRequest.of(page, 10);
+		
+		Iterable<Article> articleList = ar.findAll(pageable);
+		
+		model.addAttribute("articleList", articleList);
+	
+		return "adminarticleviewer";
+	}
+	
+	@GetMapping(value = "/admin/editArticle")
+	public String adminArticleEditor(Model model, @RequestParam(defaultValue = "0") String id) {
+		ArticleRepository articleRepository = (ArticleRepository) repositoryMap.get("articleRepo");
+		
+		Article ar = articleRepository.getReferenceById(id);
+		
+		model.addAttribute("article", ar);
+		
+		// User calls editArticle endpoint, so we set isEdit to true for the frontend render
+		model.addAttribute("isEdit", true);
+		
+		return "article";
+	}
+	
+	@GetMapping(value = "/admin/newArticle")
+	public String adminArticleCreator(Model model) {
+		model.addAttribute("isEdit", false);
+		
+		return "article";
+	}
+	
+	@GetMapping(value = "/admin/readArticle")
+	public String adminArticleReader(Model model, @RequestParam(defaultValue = "0") String id) {
+		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
+		model.addAttribute("article", ar.getReferenceById(id));
+		
+		System.out.println(ar.getReferenceById(id).getText());
+		// TODO: We need to find a way to handle the IndexOutOfBoundsException
+		return "adminreadarticle";
+	}
+	
+	// /admin/articles
+	
+	// /admin/editArticle
+	
+	// /admin/addArticle
+	
+	// /admin/readArticle for like testing and stuff?
+	
+	// maybe a specific message section?
+	
+	
+
 }
