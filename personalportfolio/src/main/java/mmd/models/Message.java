@@ -1,5 +1,6 @@
 package mmd.models;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
@@ -69,6 +70,16 @@ public class Message {
 
 	public Date getDate() {
 		return date;
+	}
+	
+	public String getFormattedDate() {
+		String formattedDate;
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy kk:mm:ss");
+		
+		formattedDate = simpleDateFormat.format(getDate());
+		
+		return formattedDate;
 	}
 
 	public void setDate(Date date) {
