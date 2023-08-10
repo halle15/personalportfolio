@@ -2,8 +2,11 @@ package mmd.personalportfolio;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
@@ -163,6 +166,60 @@ public class PersonalPortfolioController {
 	    message.setRead(true);
 	    mr.save(message);
 	    return new ResponseEntity<>(HttpStatus.OK);
+	    }
+	    else {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+	
+	/*
+	 * test curl request
+	 * curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10" http://dev.evannhall.dev/admin/messages/readMany
+	 */
+	@PostMapping(value = "/admin/messages/readMany")
+	public ResponseEntity<Void> markMultipleMessageAsRead(@RequestParam long lowId, long highId) {
+	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+	    
+	    List<Long> idsInRange = LongStream.rangeClosed(lowId, highId)
+                .boxed()
+                .collect(Collectors.toList());
+	    
+	    List<Message> messageList =  (List<Message>) mr.findAllById(idsInRange);
+	    
+	    System.out.println(messageList.toString());
+	    
+	    if(!messageList.isEmpty()) {
+	    	for(Message m : messageList) {
+	    		m.setRead(true);
+	    	}
+	    	mr.saveAll(messageList);
+	    	return new ResponseEntity<>(HttpStatus.OK);
+	    }
+	    else {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+	
+	
+	/*
+	 * test curl request
+	 * curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10" http://dev.evannhall.dev/admin/messages/deleteMany
+	 */
+	@PostMapping(value = "/admin/messages/deleteMany")
+	public ResponseEntity<Void> deleteMultipleMessages(@RequestParam long lowId, long highId) {
+	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+	    
+	    List<Long> idsInRange = LongStream.rangeClosed(lowId, highId)
+                .boxed()
+                .collect(Collectors.toList());
+	    
+	    List<Message> messageList =  (List<Message>) mr.findAllById(idsInRange);
+	    
+	    System.out.println(messageList.toString());
+	    
+	    if(!messageList.isEmpty()) {
+	    	mr.deleteAll(messageList);
+	    	return new ResponseEntity<>(HttpStatus.OK);
 	    }
 	    else {
 	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
