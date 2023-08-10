@@ -35,6 +35,13 @@
   	height: 5em;
 }
 
+.read-button{
+	background-color: #4c8ae5;
+	color: white;
+	border: gray;
+	border-radius: 5px 5px 5px 5px;
+}
+
 .delete-button{
 	background-color: #d82020;
 	color: white;

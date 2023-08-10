@@ -55,13 +55,19 @@ function readMessage(id) {
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr.setRequestHeader('Message-ID', id); // Set the ID as a request header
   xhr.onload = function() {
-    if (xhr.status !== 200) {
+	const readStatus = document.querySelector('[data-message-id="' + id + '"]').parentNode.parentNode.querySelector('.read-indicator');
+	if (readStatus.innerText === "Read") {
+		alert("Error: Message already read!");
+	}
+    else if (xhr.status !== 200) {
       // Error handling
       alert('Error marking the message as read.');
     }
     else{
-	const readStatus = document.querySelector('[data-message-id="' + id + '"]').parentNode.parentNode.querySelector('.read-indicator');
 	readStatus.innerText = "Read";
+	
+	const messageCount = document.querySelector('.message-count');
+	messageCount.innerText = messageCount.innerText - 1
 }	
   };
   xhr.send('id=' + encodeURIComponent(id));

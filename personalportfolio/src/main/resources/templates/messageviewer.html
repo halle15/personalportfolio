@@ -44,7 +44,7 @@
 
 	<div class="message-container">
 
-		<h1>Your Messages - New messages: <span th:text="${newMessageCount}"></span></h1>
+		<h1>Your Messages - New messages: <span class="message-count" th:text="${newMessageCount}"></span></h1>
 		
 		<hr> 
 
@@ -55,7 +55,7 @@
 				<h4 th:text="${message.contactInfo}"></h4>
 				<h4 th:text="${message.getFormattedDate()}"></h4>
 				<button class="delete-button" th:attr="data-message-id=${message.id}" onclick="deleteMessage(this.getAttribute('data-message-id'))">Delete</button>
-				<button class="delete-button" th:attr="data-message-id=${message.id}" onclick="readMessage(this.getAttribute('data-message-id'))">Read</button>
+				<button class="read-button" th:attr="data-message-id=${message.id}" onclick="readMessage(this.getAttribute('data-message-id'))">Read</button>
 			</div>
 			<hr>
 			<div th:text="${message.message}"></div>
