@@ -44,16 +44,18 @@
 
 	<div class="message-container">
 
-		<h1>Your Messages</h1>
+		<h1>Your Messages - New messages: <span th:text="${newMessageCount}"></span></h1>
 		
-		<hr>
+		<hr> 
 
 		<div class="message-box bg-theme" th:each="message : ${messageList}">
 			<h2 th:text="'Message from ' + ${message.name}"></h2>
+			<span th:text="${message.isRead} ? 'Read' : 'New'" class="read-indicator"></span>
 			<div class="message-infoholder">
 				<h4 th:text="${message.contactInfo}"></h4>
 				<h4 th:text="${message.date}"></h4>
 				<button class="delete-button" th:attr="data-message-id=${message.id}" onclick="deleteMessage(this.getAttribute('data-message-id'))">Delete</button>
+				<button class="delete-button" th:attr="data-message-id=${message.id}" onclick="readMessage(this.getAttribute('data-message-id'))">Read</button>
 			</div>
 			<hr>
 			<div th:text="${message.message}"></div>

@@ -21,6 +21,7 @@ public class Message {
 	String name;
 	String contactInfo;
 	String message;
+	public boolean isRead;
 
 	@DateTimeFormat
 	Date date;
@@ -73,6 +74,14 @@ public class Message {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public boolean getIsRead() {
+		return isRead;
+	}
+	
+	public void setRead(boolean status) {
+		this.isRead = status;
+	}
 
 	public Message(String name, String contactInfo, String message) {
 		super();
@@ -80,6 +89,7 @@ public class Message {
 		this.contactInfo = contactInfo;
 		this.message = message;
 		this.date = Date.from(Instant.now());
+		this.isRead = false;
 	}
 
 }

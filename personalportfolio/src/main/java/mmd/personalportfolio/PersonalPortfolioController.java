@@ -10,6 +10,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -134,13 +135,38 @@ public class PersonalPortfolioController {
 	public String adminMessageViewer(Model model, @RequestParam(defaultValue = "0") int page) {
 		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
 		
+		System.out.println(mr.countByIsReadFalse());
+		
 		Pageable pageable = PageRequest.of(page, 10);
 		
 		Iterable<Message> messageList = mr.findAll(pageable);
 		
 		model.addAttribute("messageList", messageList);
+		model.addAttribute("newMessageCount", mr.countByIsReadFalse());
+		
+		/*
+		for(Message message : messageList) {
+			message.setRead(true);
+		}
+		*/
+		
+		mr.saveAll(messageList);
 	
 		return "messageviewer";
+	}
+	
+	@PostMapping(value = "/admin/messages/read")
+	public ResponseEntity<Void> markMessageAsRead(@RequestParam long id) {
+	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+	    Message message = mr.findById(id);
+	    if(message != null) {
+	    message.setRead(true);
+	    mr.save(message);
+	    return new ResponseEntity<>(HttpStatus.OK);
+	    }
+	    else {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
 	}
 	
 	@GetMapping(value = "/admin/articles")
