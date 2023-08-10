@@ -65,6 +65,9 @@ div > h2{
 
 div > h1{
 	text-align: center;
+	text-wrap: balance;
+	
+	font-size: calc(1.275rem + 1.5vw);
 }
 
 .message-infoholder {

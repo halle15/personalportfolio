@@ -49,14 +49,15 @@
 		<hr> 
 		
 		<div class="message-box bg-theme" th:each="message : ${messageList}">
-			<h2 th:text="'Message from ' + ${message.name}"></h2>
+			<h2 th:text="${message.name}"></h2>
 			<div class="message-infoholder">
 				<h4 th:text="${message.contactInfo}"></h4>
 				<h4 th:text="${message.getFormattedDate()}"></h4>
 				<button class="delete-button" th:attr="data-message-id=${message.id}" onclick="deleteMessage(this.getAttribute('data-message-id'))">Delete</button>
 				<button class="read-button" th:attr="data-message-id=${message.id}" onclick="readMessage(this.getAttribute('data-message-id'))">Read</button>
+				<span th:text="${message.isRead} ? 'Read' : 'New'" class="read-indicator"></span>
 			</div>
-			<span th:text="${message.isRead} ? 'Read' : 'New'" class="read-indicator"></span>
+			
 			<hr>
 			<div th:text="${message.message}"></div>
 		</div>
