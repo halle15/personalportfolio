@@ -38,6 +38,7 @@ import mmd.models.Article;
 import mmd.models.Message;
 import mmd.repositories.ArticleRepository;
 import mmd.repositories.MessageRepository;
+import mmd.services.ArticleService;
 import mmd.services.MailNotificationService;
 import mmd.services.MessageService;
 import mmd.services.MiscService;
@@ -45,26 +46,24 @@ import mmd.services.MiscService;
 @Controller
 public class PersonalPortfolioController {
 
-	Map<String, CrudRepository<?, ?>> repositoryMap = new HashMap<>();
 
 	IPRateLimiter limiter;
 
 	private MailNotificationService notificationService;
 	private MiscService miscService;
 	private MessageService messageService;
+	private ArticleService articleService;
 
-	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter,
-			MailNotificationService notificationService, MiscService miscService, MessageService messageService) {
-
-		repositoryMap.put("messageRepo", messageRepo);
-		repositoryMap.put("articleRepo", articleRepo);
-
-		this.messageService = messageService;
+	public PersonalPortfolioController(IPRateLimiter limiter, MailNotificationService notificationService, MiscService miscService, MessageService messageService,
+			ArticleService articleService) {
+		super();
+		this.limiter = limiter;
 		this.notificationService = notificationService;
 		this.miscService = miscService;
-
-		this.limiter = limiter;
+		this.messageService = messageService;
+		this.articleService = articleService;
 	}
+
 	/*
 	 * @RequestMapping(value = "/css/{name}") public String getCSS(@PathVariable
 	 * String name) { return "css/" + name + ".css"; }
@@ -187,46 +186,33 @@ public class PersonalPortfolioController {
 	
 	@GetMapping(value = "/admin/articles")
 	public String adminArticleViewer(Model model, @RequestParam(defaultValue = "0") int page) {
-		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
-
-		Pageable pageable = PageRequest.of(page, 10);
-
-		Iterable<Article> articleList = ar.findAll(pageable);
-
-		model.addAttribute("articleList", articleList);
-
+		
+		articleService.viewArticle(model, page);
+		
 		return "adminarticleviewer";
 	}
 
 	@GetMapping(value = "/admin/editArticle")
 	public String adminArticleEditor(Model model, @RequestParam(defaultValue = "0") String id) {
-		ArticleRepository articleRepository = (ArticleRepository) repositoryMap.get("articleRepo");
-
-		Article ar = articleRepository.getReferenceById(id);
-
-		model.addAttribute("article", ar);
-
-		// User calls editArticle endpoint, so we set isEdit to true for the frontend
-		// render
-		model.addAttribute("isEdit", true);
+		
+		articleService.editArticle(model, id);
 
 		return "article";
 	}
 
 	@GetMapping(value = "/admin/newArticle")
 	public String adminArticleCreator(Model model) {
-		model.addAttribute("isEdit", false);
-
+		
+		articleService.createArticle(model);
+		
 		return "article";
 	}
 
 	@GetMapping(value = "/admin/readArticle")
 	public String adminArticleReader(Model model, @RequestParam(defaultValue = "0") String id) {
-		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
-		model.addAttribute("article", ar.getReferenceById(id));
+		
+		articleService.readArticle(model, id);
 
-		System.out.println(ar.getReferenceById(id).getText());
-		// TODO: We need to find a way to handle the IndexOutOfBoundsException
 		return "adminreadarticle";
 	}
 
