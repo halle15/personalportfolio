@@ -28,15 +28,28 @@
 .button-group{
 	display: grid;
   	grid-template-columns: repeat(2, 1fr); /* Creates a grid with 2 equally-sized columns */
-  	grid-gap: 5em; 
+  	grid-gap: 2.5em; 
   	
   	margin-inline: 2em;
   	margin-bottom: 2em;
   	height: 5em;
 }
 
+@media (max-width: 900px) {
+    .button-group {
+        grid-gap: 5em; 
+    }
+}
+
+.read-button{
+	background-color: #4c8ae5;
+	color: white;
+	border: gray;
+	border-radius: 5px 5px 5px 5px;
+}
+
 .delete-button{
-	background-color: #d82020;
+	background-color: #B30000;
 	color: white;
 	border: gray;
 	border-radius: 5px 5px 5px 5px;
@@ -46,8 +59,15 @@ h4 {
 	margin-bottom: 0;
 }
 
+div > h2{
+	margin-bottom: 0;
+}
+
 div > h1{
 	text-align: center;
+	text-wrap: balance;
+	
+	font-size: calc(1.275rem + 1.5vw);
 }
 
 .message-infoholder {
@@ -74,6 +94,11 @@ body {
 /*
 	UTILITY CLASSES
 */
+.del-theme{
+	background-color: #B30000;
+	color: white;
+}
+
 .bg-theme {
 	background-color: #550caf;
 	color: white;

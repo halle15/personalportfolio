@@ -35,4 +35,12 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
 	List<Message> findByDate(Date date);
 	
 	Page<Message> findAll(Pageable pageable);
+	
+	List<Message> findByIsReadTrue();
+	
+	List<Message> findByIsReadFalse();
+	
+	long countByIsReadTrue();
+	
+	long countByIsReadFalse();
 }

@@ -636,7 +636,7 @@ ul {
 	align-items: center;
 	padding: 7.5vh 7.5vw;
 	gap: 5vh;
-	background: url(images/nasaback.png);
+	background: url(images/nasaback.jpg);
 	/* Inside auto layout */
 	flex: none;
 	order: 1;

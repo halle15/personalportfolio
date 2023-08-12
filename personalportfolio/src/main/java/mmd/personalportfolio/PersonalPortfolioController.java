@@ -2,14 +2,19 @@ package mmd.personalportfolio;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -33,6 +38,7 @@ import mmd.models.Article;
 import mmd.models.Message;
 import mmd.repositories.ArticleRepository;
 import mmd.repositories.MessageRepository;
+import mmd.services.MailNotificationService;
 
 @Controller
 public class PersonalPortfolioController {
@@ -40,6 +46,9 @@ public class PersonalPortfolioController {
 	Map<String, CrudRepository<?, ?>> repositoryMap = new HashMap<>();
 
 	IPRateLimiter limiter;
+	
+	@Autowired
+	private MailNotificationService notificationService;
 
 	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter) {
 		repositoryMap.put("messageRepo", messageRepo);
@@ -60,7 +69,7 @@ public class PersonalPortfolioController {
 				.body(new InputStreamResource(imgFile.getInputStream()));
 	}
 
-	@GetMapping(value = "/")
+	@GetMapping(value = {"/", "/home", "/index"})
 	public String index(HttpServletRequest request, Model model, Authentication auth) {
 
 		boolean isAdmin = false;
@@ -83,11 +92,6 @@ public class PersonalPortfolioController {
 		return "login";
 	}
 
-	@GetMapping(value = "/home")
-	public String home() {
-		return "index";
-	}
-
 	@GetMapping(value = "/contact")
 	public String contact() {
 		return "contact";
@@ -100,8 +104,8 @@ public class PersonalPortfolioController {
 
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
-			@RequestParam String email, @RequestParam String message) {
-		Message inMsg = new Message(name, email, message);
+			@RequestParam String contactInfo, @RequestParam String message) {
+		Message inMsg = new Message(name, contactInfo, message);
 		System.out.println(inMsg.toString());
 
 		if (!limiter.tryAcquire(request.getRemoteAddr())) {
@@ -117,9 +121,10 @@ public class PersonalPortfolioController {
 		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
 
 		mr.save(inMsg);
+		
+		notificationService.sendSimpleMessage("New message from " + inMsg.getName(), "Contact Information: " + inMsg.getContactInfo() + "\n\nMESSAGE: " + inMsg.getMessage());
 
-		return "contact";
-
+		return "redirect:/contact";
 	}
 	
 	
@@ -134,13 +139,98 @@ public class PersonalPortfolioController {
 	public String adminMessageViewer(Model model, @RequestParam(defaultValue = "0") int page) {
 		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
 		
+		System.out.println(mr.countByIsReadFalse());
+		
 		Pageable pageable = PageRequest.of(page, 10);
 		
 		Iterable<Message> messageList = mr.findAll(pageable);
 		
 		model.addAttribute("messageList", messageList);
+		model.addAttribute("newMessageCount", mr.countByIsReadFalse());
+		
+		/*
+		for(Message message : messageList) {
+			message.setRead(true);
+		}
+		*/
+		
+		mr.saveAll(messageList);
 	
 		return "messageviewer";
+	}
+	
+	@PostMapping(value = "/admin/messages/read")
+	public ResponseEntity<Void> markMessageAsRead(@RequestParam long id) {
+	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+	    Message message = mr.findById(id);
+	    if(message != null) {
+	    message.setRead(true);
+	    mr.save(message);
+	    return new ResponseEntity<>(HttpStatus.OK);
+	    }
+	    else {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+	
+	/*
+	 * test curl request
+	 * curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10" http://dev.evannhall.dev/admin/messages/readMany
+	 */
+	@PostMapping(value = "/admin/messages/readMany")
+	public ResponseEntity<Void> markMultipleMessageAsRead(@RequestParam long lowId, long highId) {
+	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+	    
+	    List<Long> idsInRange = LongStream.rangeClosed(lowId, highId)
+                .boxed()
+                .collect(Collectors.toList());
+	    
+	    List<Message> messageList =  (List<Message>) mr.findAllById(idsInRange);
+	    
+	    System.out.println(messageList.toString());
+	    
+	    if(!messageList.isEmpty()) {
+	    	for(Message m : messageList) {
+	    		m.setRead(true);
+	    	}
+	    	mr.saveAll(messageList);
+	    	return new ResponseEntity<>(HttpStatus.OK);
+	    }
+	    else {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+	
+	
+	/*
+	 * test curl request
+	 * curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10" http://dev.evannhall.dev/admin/messages/deleteMany
+	 */
+	@PostMapping(value = "/admin/messages/deleteMany")
+	public ResponseEntity<Void> deleteMultipleMessages(@RequestParam long lowId, long highId) {
+	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
+	    
+	    List<Long> idsInRange = LongStream.rangeClosed(lowId, highId)
+                .boxed()
+                .collect(Collectors.toList());
+	    
+	    List<Message> messageList =  (List<Message>) mr.findAllById(idsInRange);
+	    
+	    System.out.println(messageList.toString());
+	    
+	    if(!messageList.isEmpty()) {
+	    	mr.deleteAll(messageList);
+	    	return new ResponseEntity<>(HttpStatus.OK);
+	    }
+	    else {
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+	
+	@GetMapping(value = "/admin/email")
+	public String sendEmail(){
+		notificationService.sendSimpleMessage("BUTTON HIT!", "AY YOU HIT DA BUTTON CUH!");
+	    return "redirect:/admin";
 	}
 	
 	@GetMapping(value = "/admin/articles")
