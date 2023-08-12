@@ -69,7 +69,7 @@ public class PersonalPortfolioController {
 				.body(new InputStreamResource(imgFile.getInputStream()));
 	}
 
-	@GetMapping(value = "/")
+	@GetMapping(value = {"/", "/home", "/index"})
 	public String index(HttpServletRequest request, Model model, Authentication auth) {
 
 		boolean isAdmin = false;
@@ -90,11 +90,6 @@ public class PersonalPortfolioController {
 	@GetMapping(value = "/login")
 	public String login(Model model) {
 		return "login";
-	}
-
-	@GetMapping(value = "/home")
-	public String home() {
-		return "index";
 	}
 
 	@GetMapping(value = "/contact")
@@ -127,10 +122,9 @@ public class PersonalPortfolioController {
 
 		mr.save(inMsg);
 		
-		notificationService.sendSimpleMessage("New message from " + inMsg.getName(), inMsg.toString());
+		notificationService.sendSimpleMessage("New message from " + inMsg.getName(), "Contact Information: " + inMsg.getContactInfo() + "\n\nMESSAGE: " + inMsg.getMessage());
 
-		return "contact";
-
+		return "redirect:/contact";
 	}
 	
 	
@@ -235,7 +229,7 @@ public class PersonalPortfolioController {
 	
 	@GetMapping(value = "/admin/email")
 	public String sendEmail(){
-		notificationService.sendSimpleMessage("TEST SUBJECT", "<h1>YOU GOT THE MAIL BUB!</h1><br><span>fuck yuh</span>");
+		notificationService.sendSimpleMessage("BUTTON HIT!", "AY YOU HIT DA BUTTON CUH!");
 	    return "redirect:/admin";
 	}
 	
