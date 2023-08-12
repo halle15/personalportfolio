@@ -23,10 +23,14 @@ public class MessageService {
 	MessageRepository mr;
 	IPRateLimiter limiter;
 	
-	public MessageService(MessageRepository mr, IPRateLimiter limiter) {
+	MailNotificationService notificationService;
+	
+	public MessageService(MessageRepository mr, IPRateLimiter limiter, MailNotificationService notificationService) {
 		super();
 		this.limiter = limiter;
 		this.mr = mr;
+		
+		this.notificationService = notificationService;
 	}
 
 	public boolean saveMessage(Message message, HttpServletRequest request) {
@@ -35,6 +39,8 @@ public class MessageService {
 		}
 		
 		mr.save(message);
+		
+		notificationService.sendSimpleMessage("New message from " + message.getName(), "Contact Information: " + message.getContactInfo() + "\n\nMESSAGE: " + message.getMessage());
 		
 		return true;
 	}

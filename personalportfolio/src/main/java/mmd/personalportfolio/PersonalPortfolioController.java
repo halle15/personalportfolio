@@ -113,10 +113,6 @@ public class PersonalPortfolioController {
 			return "redirect:/error";
 		}
 
-		// notificationService.sendSimpleMessage("New message from " + inMsg.getName(),
-		// "Contact Information: " + inMsg.getContactInfo() + "\n\nMESSAGE: " +
-		// inMsg.getMessage());
-
 		return "redirect:/contact";
 	}
 
