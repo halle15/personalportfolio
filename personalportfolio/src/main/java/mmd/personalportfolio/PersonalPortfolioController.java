@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +38,7 @@ import mmd.models.Article;
 import mmd.models.Message;
 import mmd.repositories.ArticleRepository;
 import mmd.repositories.MessageRepository;
+import mmd.services.MailNotificationService;
 
 @Controller
 public class PersonalPortfolioController {
@@ -44,6 +46,9 @@ public class PersonalPortfolioController {
 	Map<String, CrudRepository<?, ?>> repositoryMap = new HashMap<>();
 
 	IPRateLimiter limiter;
+	
+	@Autowired
+	private MailNotificationService notificationService;
 
 	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter) {
 		repositoryMap.put("messageRepo", messageRepo);
@@ -121,6 +126,8 @@ public class PersonalPortfolioController {
 		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
 
 		mr.save(inMsg);
+		
+		notificationService.sendSimpleMessage("New message from " + inMsg.getName(), inMsg.toString());
 
 		return "contact";
 
@@ -224,6 +231,12 @@ public class PersonalPortfolioController {
 	    else {
 	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
+	}
+	
+	@GetMapping(value = "/admin/email")
+	public String sendEmail(){
+		notificationService.sendSimpleMessage("TEST SUBJECT", "<h1>YOU GOT THE MAIL BUB!</h1><br><span>fuck yuh</span>");
+	    return "redirect:/admin";
 	}
 	
 	@GetMapping(value = "/admin/articles")

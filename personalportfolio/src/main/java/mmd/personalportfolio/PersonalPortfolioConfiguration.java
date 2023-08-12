@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EntityScan(basePackages = "mmd.models")
-@ComponentScan(basePackages = { "mmd.filters" })
+@ComponentScan(basePackages = { "mmd.filters", "mmd.services" })
 @EnableJpaRepositories(basePackages = { "mmd.repositories" })
 public class PersonalPortfolioConfiguration implements WebMvcConfigurer {
 
