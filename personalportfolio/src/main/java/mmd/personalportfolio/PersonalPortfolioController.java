@@ -39,6 +39,7 @@ import mmd.models.Message;
 import mmd.repositories.ArticleRepository;
 import mmd.repositories.MessageRepository;
 import mmd.services.MailNotificationService;
+import mmd.services.MiscService;
 
 @Controller
 public class PersonalPortfolioController {
@@ -49,6 +50,9 @@ public class PersonalPortfolioController {
 	
 	@Autowired
 	private MailNotificationService notificationService;
+	
+	@Autowired
+	private MiscService miscService;
 
 	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter) {
 		repositoryMap.put("messageRepo", messageRepo);
@@ -71,20 +75,12 @@ public class PersonalPortfolioController {
 
 	@GetMapping(value = {"/", "/home", "/index"})
 	public String index(HttpServletRequest request, Model model, Authentication auth) {
-
-		boolean isAdmin = false;
-		String ipAddr = request.getHeader("X-Real-IP");
 		
-		try {
-			if (ipAddr.equals("192.168.1.1") || ipAddr.equals("47.224.71.176") || auth.isAuthenticated()) {
-				isAdmin = true;
-			}
-		} catch (NullPointerException e) {
-			System.out.println("headerIP fail!");
+		if(miscService.ipCheck(request, auth)) {
+			model.addAttribute("isAdminIP", true); 
 		}
-
-		model.addAttribute("isAdminIP", isAdmin); 
 		return "index";
+		
 	}
 
 	@GetMapping(value = "/login")
