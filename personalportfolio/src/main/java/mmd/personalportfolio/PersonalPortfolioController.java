@@ -120,7 +120,11 @@ public class PersonalPortfolioController {
 		return "redirect:/contact";
 	}
 
-	// ADMIN SECTION
+	/*
+	 * Admin Section
+	 * 
+	 * 
+	 */
 
 	@GetMapping(value = "/admin")
 	public String admin(Model model) {
@@ -129,33 +133,15 @@ public class PersonalPortfolioController {
 
 	@GetMapping(value = "/admin/messages")
 	public String adminMessageViewer(Model model, @RequestParam(defaultValue = "0") int page) {
-		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
 
-		System.out.println(mr.countByIsReadFalse());
-
-		Pageable pageable = PageRequest.of(page, 10);
-
-		Iterable<Message> messageList = mr.findAll(pageable);
-
-		model.addAttribute("messageList", messageList);
-		model.addAttribute("newMessageCount", mr.countByIsReadFalse());
-
-		/*
-		 * for(Message message : messageList) { message.setRead(true); }
-		 */
-
-		mr.saveAll(messageList);
+		messageService.readMessages(model, page);
 
 		return "messageviewer";
 	}
 
 	@PostMapping(value = "/admin/messages/read")
 	public ResponseEntity<Void> markMessageAsRead(@RequestParam long id) {
-		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-		Message message = mr.findById(id);
-		if (message != null) {
-			message.setRead(true);
-			mr.save(message);
+		if (messageService.markMessageAsRead(id)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -169,19 +155,7 @@ public class PersonalPortfolioController {
 	 */
 	@PostMapping(value = "/admin/messages/readMany")
 	public ResponseEntity<Void> markMultipleMessageAsRead(@RequestParam long lowId, long highId) {
-		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-
-		List<Long> idsInRange = LongStream.rangeClosed(lowId, highId).boxed().collect(Collectors.toList());
-
-		List<Message> messageList = (List<Message>) mr.findAllById(idsInRange);
-
-		System.out.println(messageList.toString());
-
-		if (!messageList.isEmpty()) {
-			for (Message m : messageList) {
-				m.setRead(true);
-			}
-			mr.saveAll(messageList);
+		if (messageService.markMultipleMessageAsRead(lowId, highId)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -195,16 +169,7 @@ public class PersonalPortfolioController {
 	 */
 	@PostMapping(value = "/admin/messages/deleteMany")
 	public ResponseEntity<Void> deleteMultipleMessages(@RequestParam long lowId, long highId) {
-		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-
-		List<Long> idsInRange = LongStream.rangeClosed(lowId, highId).boxed().collect(Collectors.toList());
-
-		List<Message> messageList = (List<Message>) mr.findAllById(idsInRange);
-
-		System.out.println(messageList.toString());
-
-		if (!messageList.isEmpty()) {
-			mr.deleteAll(messageList);
+		if (messageService.deleteMultipleMessages(lowId, highId)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -217,6 +182,13 @@ public class PersonalPortfolioController {
 		return "redirect:/admin";
 	}
 
+	/*
+	 * 	Article Section
+	 * 
+	 * 
+	 */
+		
+	
 	@GetMapping(value = "/admin/articles")
 	public String adminArticleViewer(Model model, @RequestParam(defaultValue = "0") int page) {
 		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
