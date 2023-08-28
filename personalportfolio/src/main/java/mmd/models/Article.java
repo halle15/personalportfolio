@@ -18,8 +18,8 @@ import jakarta.persistence.Id;
 public class Article {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String id;
 	@NonNull
 	private String title;
 	@NonNull
@@ -39,11 +39,11 @@ public class Article {
 
 	private Date pubDate;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
