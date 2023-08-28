@@ -22,4 +22,33 @@ public class SettingsService {
 			return settingsRepository.findById(1L).isEnabled();
 		}
 	}
+	
+	public boolean setEmailStatus(boolean status) {
+		if(settingsRepository.findById(1L) == null) {
+			System.out.println("Setting settings...");
+			settingsRepository.save(new Settings(1L, status, ""));
+			return status;
+		}
+		else {
+			Settings s = settingsRepository.findById(1L);
+			s.setEnabled(status);
+			settingsRepository.save(s);
+			return status;
+		}
+	}
+	
+	public boolean setEmailTarget(String target) {
+		if(settingsRepository.findById(1L) == null) {
+			System.out.println("Setting settings...");
+			settingsRepository.save(new Settings(1L, false, target));
+			return true;
+		}
+		else {
+			Settings s = settingsRepository.findById(1L);
+			s.setEmailTarget(target);
+			settingsRepository.save(s);
+			return true;
+		}
+		
+	}
 }

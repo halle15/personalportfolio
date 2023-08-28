@@ -24,6 +24,15 @@ public class MailNotificationService {
         emailSender.send(message);
     }
     
+    @Async
+    public void sendSimpleMessage(String email, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject(subject);
+        message.setText(text);
+        emailSender.send(message);
+    }
+    
     public void sendMessageNotification(Message message) {
     	
     }

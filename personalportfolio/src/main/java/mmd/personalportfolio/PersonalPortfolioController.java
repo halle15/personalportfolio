@@ -42,6 +42,7 @@ import mmd.services.ArticleService;
 import mmd.services.MailNotificationService;
 import mmd.services.MessageService;
 import mmd.services.MiscService;
+import mmd.services.SettingsService;
 
 @Controller
 public class PersonalPortfolioController {
@@ -53,16 +54,20 @@ public class PersonalPortfolioController {
 	private MiscService miscService;
 	private MessageService messageService;
 	private ArticleService articleService;
-
-	public PersonalPortfolioController(IPRateLimiter limiter, MailNotificationService notificationService, MiscService miscService, MessageService messageService,
-			ArticleService articleService) {
+	private SettingsService settingsService;
+	
+	public PersonalPortfolioController(IPRateLimiter limiter, MailNotificationService notificationService,
+			MiscService miscService, MessageService messageService, ArticleService articleService,
+			SettingsService settingsService) {
 		super();
 		this.limiter = limiter;
 		this.notificationService = notificationService;
 		this.miscService = miscService;
 		this.messageService = messageService;
 		this.articleService = articleService;
+		this.settingsService = settingsService;
 	}
+
 
 	/*
 	 * @RequestMapping(value = "/css/{name}") public String getCSS(@PathVariable
@@ -173,7 +178,7 @@ public class PersonalPortfolioController {
 
 	@GetMapping(value = "/admin/email")
 	public String sendEmail() {
-		notificationService.sendSimpleMessage("BUTTON HIT!", "AY YOU HIT DA BUTTON CUH!");
+		settingsService.setEmailStatus(true);
 		return "redirect:/admin";
 	}
 
