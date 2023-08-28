@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				data: JSON.stringify(formData),
 				contentType: 'application/json',
 				success: function(response) {
-					alert('Article e successfully!');
+					alert('Article edited successfully!');
 					window.location.href = "/admin/articles"
 				},
 				error: function(error) {

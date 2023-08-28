@@ -21,7 +21,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg bg-theme">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Admin Panel</a>
+			<a class="navbar-brand" href="/admin">Admin Panel</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -53,6 +53,7 @@
 			<div class="article-infoholder">
 				<h4 th:text="${article.author}"></h4>
 				<h4 th:text="${article.pubDate}"></h4>
+				<button class="read-button" th:attr="data-article-id=${article.id}" onclick="readArticle(this.getAttribute('data-article-id'))">Read</button>
 				<button class="edit-button" th:attr="data-article-id=${article.id}" onclick="editArticle(this.getAttribute('data-article-id'))">Edit</button>
 				<button class="delete-button" th:attr="data-article-id=${article.id}" onclick="deleteArticle(this.getAttribute('data-article-id'))">Delete</button>
 			</div>

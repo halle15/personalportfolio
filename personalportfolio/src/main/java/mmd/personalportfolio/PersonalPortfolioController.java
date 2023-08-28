@@ -38,24 +38,37 @@ import mmd.models.Article;
 import mmd.models.Message;
 import mmd.repositories.ArticleRepository;
 import mmd.repositories.MessageRepository;
+import mmd.services.ArticleService;
 import mmd.services.MailNotificationService;
+import mmd.services.MessageService;
+import mmd.services.MiscService;
+import mmd.services.SettingsService;
 
 @Controller
 public class PersonalPortfolioController {
 
-	Map<String, CrudRepository<?, ?>> repositoryMap = new HashMap<>();
 
 	IPRateLimiter limiter;
-	
-	@Autowired
+
 	private MailNotificationService notificationService;
-
-	PersonalPortfolioController(MessageRepository messageRepo, ArticleRepository articleRepo, IPRateLimiter limiter) {
-		repositoryMap.put("messageRepo", messageRepo);
-		repositoryMap.put("articleRepo", articleRepo);
-
+	private MiscService miscService;
+	private MessageService messageService;
+	private ArticleService articleService;
+	private SettingsService settingsService;
+	
+	public PersonalPortfolioController(IPRateLimiter limiter, MailNotificationService notificationService,
+			MiscService miscService, MessageService messageService, ArticleService articleService,
+			SettingsService settingsService) {
+		super();
 		this.limiter = limiter;
+		this.notificationService = notificationService;
+		this.miscService = miscService;
+		this.messageService = messageService;
+		this.articleService = articleService;
+		this.settingsService = settingsService;
 	}
+
+
 	/*
 	 * @RequestMapping(value = "/css/{name}") public String getCSS(@PathVariable
 	 * String name) { return "css/" + name + ".css"; }
@@ -69,22 +82,14 @@ public class PersonalPortfolioController {
 				.body(new InputStreamResource(imgFile.getInputStream()));
 	}
 
-	@GetMapping(value = {"/", "/home", "/index"})
+	@GetMapping(value = { "/", "/home", "/index" })
 	public String index(HttpServletRequest request, Model model, Authentication auth) {
 
-		boolean isAdmin = false;
-		String ipAddr = request.getHeader("X-Real-IP");
-		
-		try {
-			if (ipAddr.equals("192.168.1.1") || ipAddr.equals("47.224.71.176") || auth.isAuthenticated()) {
-				isAdmin = true;
-			}
-		} catch (NullPointerException e) {
-			System.out.println("headerIP fail!");
+		if (miscService.ipCheck(request, auth)) {
+			model.addAttribute("isAdminIP", true);
 		}
-
-		model.addAttribute("isAdminIP", isAdmin); 
 		return "index";
+
 	}
 
 	@GetMapping(value = "/login")
@@ -105,188 +110,125 @@ public class PersonalPortfolioController {
 	@PostMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String putMessage(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
 			@RequestParam String contactInfo, @RequestParam String message) {
+
 		Message inMsg = new Message(name, contactInfo, message);
-		System.out.println(inMsg.toString());
 
-		if (!limiter.tryAcquire(request.getRemoteAddr())) {
-			try {
-				System.out.println("request error");
-				response.sendError(429, "Too many requests!");
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			return "error";
+		if (!messageService.saveMessage(inMsg, request)) {
+			return "redirect:/error";
 		}
-
-		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-
-		mr.save(inMsg);
-		
-		notificationService.sendSimpleMessage("New message from " + inMsg.getName(), "Contact Information: " + inMsg.getContactInfo() + "\n\nMESSAGE: " + inMsg.getMessage());
 
 		return "redirect:/contact";
 	}
-	
-	
-	// ADMIN SECTION
-	
+
+	/*
+	 * Admin Section
+	 * 
+	 * 
+	 */
+
 	@GetMapping(value = "/admin")
 	public String admin(Model model) {
 		return "admin";
 	}
-	
+
 	@GetMapping(value = "/admin/messages")
 	public String adminMessageViewer(Model model, @RequestParam(defaultValue = "0") int page) {
-		MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-		
-		System.out.println(mr.countByIsReadFalse());
-		
-		Pageable pageable = PageRequest.of(page, 10);
-		
-		Iterable<Message> messageList = mr.findAll(pageable);
-		
-		model.addAttribute("messageList", messageList);
-		model.addAttribute("newMessageCount", mr.countByIsReadFalse());
-		
-		/*
-		for(Message message : messageList) {
-			message.setRead(true);
-		}
-		*/
-		
-		mr.saveAll(messageList);
-	
+
+		messageService.readMessages(model, page);
+
 		return "messageviewer";
 	}
-	
+
 	@PostMapping(value = "/admin/messages/read")
 	public ResponseEntity<Void> markMessageAsRead(@RequestParam long id) {
-	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-	    Message message = mr.findById(id);
-	    if(message != null) {
-	    message.setRead(true);
-	    mr.save(message);
-	    return new ResponseEntity<>(HttpStatus.OK);
-	    }
-	    else {
-	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+		if (messageService.markMessageAsRead(id)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
-	
+
 	/*
-	 * test curl request
-	 * curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10" http://dev.evannhall.dev/admin/messages/readMany
+	 * test curl request curl -X POST -H
+	 * "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10"
+	 * http://dev.evannhall.dev/admin/messages/readMany
 	 */
 	@PostMapping(value = "/admin/messages/readMany")
 	public ResponseEntity<Void> markMultipleMessageAsRead(@RequestParam long lowId, long highId) {
-	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-	    
-	    List<Long> idsInRange = LongStream.rangeClosed(lowId, highId)
-                .boxed()
-                .collect(Collectors.toList());
-	    
-	    List<Message> messageList =  (List<Message>) mr.findAllById(idsInRange);
-	    
-	    System.out.println(messageList.toString());
-	    
-	    if(!messageList.isEmpty()) {
-	    	for(Message m : messageList) {
-	    		m.setRead(true);
-	    	}
-	    	mr.saveAll(messageList);
-	    	return new ResponseEntity<>(HttpStatus.OK);
-	    }
-	    else {
-	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+		if (messageService.markMultipleMessageAsRead(lowId, highId)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
-	
-	
+
 	/*
-	 * test curl request
-	 * curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10" http://dev.evannhall.dev/admin/messages/deleteMany
+	 * test curl request curl -X POST -H
+	 * "Content-Type: application/x-www-form-urlencoded" -d "lowId=1&highId=10"
+	 * http://dev.evannhall.dev/admin/messages/deleteMany
 	 */
 	@PostMapping(value = "/admin/messages/deleteMany")
 	public ResponseEntity<Void> deleteMultipleMessages(@RequestParam long lowId, long highId) {
-	    MessageRepository mr = (MessageRepository) repositoryMap.get("messageRepo");
-	    
-	    List<Long> idsInRange = LongStream.rangeClosed(lowId, highId)
-                .boxed()
-                .collect(Collectors.toList());
-	    
-	    List<Message> messageList =  (List<Message>) mr.findAllById(idsInRange);
-	    
-	    System.out.println(messageList.toString());
-	    
-	    if(!messageList.isEmpty()) {
-	    	mr.deleteAll(messageList);
-	    	return new ResponseEntity<>(HttpStatus.OK);
-	    }
-	    else {
-	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+		if (messageService.deleteMultipleMessages(lowId, highId)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
-	
+
 	@GetMapping(value = "/admin/email")
-	public String sendEmail(){
-		notificationService.sendSimpleMessage("BUTTON HIT!", "AY YOU HIT DA BUTTON CUH!");
-	    return "redirect:/admin";
+	public String sendEmail() {
+		settingsService.setEmailStatus(true);
+		return "redirect:/admin";
 	}
+
+	/*
+	 * 	Article Section
+	 * 
+	 * 
+	 */
+		
 	
 	@GetMapping(value = "/admin/articles")
 	public String adminArticleViewer(Model model, @RequestParam(defaultValue = "0") int page) {
-		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
 		
-		Pageable pageable = PageRequest.of(page, 10);
+		articleService.viewArticle(model, page);
 		
-		Iterable<Article> articleList = ar.findAll(pageable);
-		
-		model.addAttribute("articleList", articleList);
-	
 		return "adminarticleviewer";
 	}
-	
+
 	@GetMapping(value = "/admin/editArticle")
 	public String adminArticleEditor(Model model, @RequestParam(defaultValue = "0") String id) {
-		ArticleRepository articleRepository = (ArticleRepository) repositoryMap.get("articleRepo");
 		
-		Article ar = articleRepository.getReferenceById(id);
-		
-		model.addAttribute("article", ar);
-		
-		// User calls editArticle endpoint, so we set isEdit to true for the frontend render
-		model.addAttribute("isEdit", true);
-		
+		articleService.editArticle(model, id);
+
 		return "article";
 	}
-	
+
 	@GetMapping(value = "/admin/newArticle")
 	public String adminArticleCreator(Model model) {
-		model.addAttribute("isEdit", false);
+		
+		articleService.createArticle(model);
 		
 		return "article";
 	}
-	
+
 	@GetMapping(value = "/admin/readArticle")
 	public String adminArticleReader(Model model, @RequestParam(defaultValue = "0") String id) {
-		ArticleRepository ar = (ArticleRepository) repositoryMap.get("articleRepo");
-		model.addAttribute("article", ar.getReferenceById(id));
 		
-		System.out.println(ar.getReferenceById(id).getText());
-		// TODO: We need to find a way to handle the IndexOutOfBoundsException
+		articleService.readArticle(model, id);
+
 		return "adminreadarticle";
 	}
-	
+
 	// /admin/articles
-	
+
 	// /admin/editArticle
-	
+
 	// /admin/addArticle
-	
+
 	// /admin/readArticle for like testing and stuff?
-	
+
 	// maybe a specific message section?
-	
-	
 
 }

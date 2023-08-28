@@ -190,3 +190,9 @@ function editArticle(id){
 	
 	window.location.href = pageUrl;
 }
+
+function readArticle(id){
+	let pageUrl = '/admin/readArticle?id=' + id;
+	
+	window.location.href = pageUrl;
+}
